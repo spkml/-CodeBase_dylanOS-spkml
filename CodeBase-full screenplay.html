@@ -1,0 +1,2985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODEBASE — The Complete Unabridged Screenplay</title>
+    <style>
+        /* CRT SCREEN EFFECT - AMBER/GREEN MONITOR STYLE */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #0c0b0a;
+            background-image: radial-gradient(rgba(30, 20, 5, 0.3) 1px, transparent 1px);
+            background-size: 40px 40px;
+            font-family: 'Courier New', 'VT323', 'Share Tech Mono', monospace;
+            color: #39ff8a;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* CRT SCANLINES */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0) 0px,
+                rgba(0, 0, 0, 0.2) 1px,
+                rgba(0, 0, 0, 0.5) 2px,
+                rgba(0, 0, 0, 0.2) 3px,
+                rgba(0, 0, 0, 0) 4px
+            );
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.3;
+        }
+
+        /* CRT FLICKER */
+        @keyframes flicker {
+            0% { opacity: 1; }
+            2% { opacity: 0.9; }
+            4% { opacity: 1; }
+            19% { opacity: 1; }
+            20% { opacity: 0.8; }
+            21% { opacity: 1; }
+            50% { opacity: 1; }
+            51% { opacity: 0.95; }
+            52% { opacity: 1; }
+            99% { opacity: 1; }
+            100% { opacity: 0.98; }
+        }
+
+        .screenplay {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(10, 8, 5, 0.8);
+            border: 2px solid #d4911a;
+            box-shadow: 0 0 30px rgba(212, 145, 26, 0.3), inset 0 0 20px rgba(57, 255, 138, 0.1);
+            padding: 40px 30px;
+            position: relative;
+            backdrop-filter: blur(2px);
+            animation: flicker 8s infinite;
+        }
+
+        /* HEADER STYLES */
+        .header {
+            border-bottom: 2px solid #d4911a;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 4.5rem;
+            letter-spacing: 8px;
+            color: #d4911a;
+            text-shadow: 0 0 10px #d4911a, 0 0 20px #5c3d0a;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .title span {
+            color: #39ff8a;
+            text-shadow: 0 0 10px #39ff8a;
+        }
+
+        .subtitle {
+            color: #e8e0cc;
+            font-size: 1rem;
+            letter-spacing: 4px;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* ASCII ART CONTAINER */
+        .ascii-art {
+            background: #0a0805;
+            border: 1px solid #d4911a;
+            padding: 20px;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            font-size: 12px;
+            line-height: 1.2;
+            color: #39ff8a;
+            text-align: center;
+            overflow-x: auto;
+            box-shadow: inset 0 0 20px rgba(57, 255, 138, 0.1);
+        }
+
+        /* SCENE CONTAINER */
+        .scene {
+            margin: 40px 0;
+            border-left: 3px solid #d4911a;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .scene-number {
+            color: #d4911a;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+        }
+
+        .scene-heading {
+            color: #39ff8a;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .scene-time {
+            color: #e8e0cc;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        /* SHOT BLOCK */
+        .shot {
+            margin: 30px 0;
+            padding: 15px;
+            background: rgba(30, 20, 5, 0.3);
+            border: 1px solid #3d3830;
+        }
+
+        .shot-number {
+            color: #d4911a;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            border: 1px solid #d4911a;
+            padding: 2px 8px;
+        }
+
+        .shot-type {
+            color: #39ff8a;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            display: inline-block;
+        }
+
+        .camera-specs {
+            background: #1a1a1a;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.8rem;
+            color: #e8e0cc;
+            border-left: 3px solid #39ff8a;
+        }
+
+        .camera-specs strong {
+            color: #d4911a;
+        }
+
+        .action {
+            color: #e8e0cc;
+            margin: 15px 0;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .dialogue {
+            margin: 20px 0 20px 40px;
+            max-width: 600px;
+        }
+
+        .character {
+            color: #d4911a;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .parenthetical {
+            color: #39ff8a;
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-left: 20px;
+        }
+
+        .dialog-text {
+            color: #e8e0cc;
+            margin-left: 30px;
+            margin-top: 5px;
+        }
+
+        /* SYSTEM/COMPUTER DIALOGUE */
+        .system-dialogue {
+            color: #39ff8a;
+            border-left: 2px solid #39ff8a;
+            padding-left: 15px;
+            margin: 15px 0 15px 40px;
+            font-style: italic;
+            background: rgba(57, 255, 138, 0.05);
+        }
+
+        /* CODE BLOCK */
+        .code-block {
+            background: #0a0805;
+            border: 1px solid #39ff8a;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            color: #39ff8a;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        /* TRANSITION */
+        .transition {
+            text-align: right;
+            color: #5a6070;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 20px 0;
+            font-size: 0.8rem;
+        }
+
+        /* TTS PLAYBACK BUTTONS */
+        .tts-button {
+            background: transparent;
+            border: 1px solid #39ff8a;
+            color: #39ff8a;
+            padding: 5px 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+
+        .tts-button:hover {
+            background: #39ff8a;
+            color: #0c0b0a;
+        }
+
+        .tts-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 2px solid #d4911a;
+            margin-top: 50px;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #5a6070;
+        }
+
+        /* PROGRESS BAR */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #39ff8a, #d4911a);
+            z-index: 1000;
+            transition: width 0.3s;
+        }
+
+        /* NAVIGATION */
+        .nav-panel {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3d3830;
+            border: 1px solid #d4911a;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-dot.active {
+            background: #39ff8a;
+            box-shadow: 0 0 15px #39ff8a;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .title { font-size: 2.5rem; }
+            .screenplay { padding: 20px; }
+            .dialogue { margin-left: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress"></div>
+
+    <!-- ASCII HEADER ANIMATION -->
+    <div class="ascii-art" id="title-ascii">
+        <pre>
+    ╔══════════════════════════════════════════════════════════╗
+    ║  ░▀▀█░█▀█░█▀▀░█▀▄░█▀▀░█▀▄░█▀▀░█▀▄░█▀█░▀█▀░█▀▀░░░░█▀▀░█▀█░█▀▄  ║
+    ║  ░░░█░█░█░█▀▀░█░█░█▀▀░█▀▄░█▀▀░█░█░█▀█░░█░░█▀▀░░░░█░░░█░█░█░█  ║
+    ║  ░▀▀░░▀▀▀░▀▀▀░▀▀░░▀▀▀░▀░▀░▀▀▀░▀▀░░▀░▀░░▀░░▀▀▀░░░░▀▀▀░▀▀▀░▀▀░  ║
+    ║                                                          ║
+    ║              ░█▀▀░█░█░█▀█░█▀▀░█▀▄░▀█▀░█▀▀               ║
+    ║              ░█░░░█▀█░█░█░█▀▀░█▀▄░░█░░█▀▀               ║
+    ║              ░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀               ║
+    ╚══════════════════════════════════════════════════════════╝
+        </pre>
+    </div>
+
+    <div class="screenplay">
+        <div class="header">
+            <div class="title">CODE<span>BASE</span></div>
+            <div class="subtitle">AN ORIGINAL SCREENPLAY • UNABRIDGED EDITION</div>
+            <div class="subtitle" style="color: #39ff8a; margin-top: 15px;">▸ PHILIP & SALLY STORYLINE ◂</div>
+        </div>
+
+        <!-- DRAMATIS PERSONAE -->
+        <div class="scene" id="dramatis">
+            <div class="scene-number">DRAMATIS PERSONAE</div>
+            <div class="ascii-art" style="font-size: 10px;">
+                <pre>
+    ┌─────────────────────────────────────────────────────┐
+    │                                                     │
+    │    ╔═══╗ ╔═══╗ ╔═══╗ ╔═══╗ ╔═══╗ ╔═══╗ ╔═══╗       │
+    │    ║ P ║ ║ H ║ ║ I ║ ║ L ║ ║ I ║ ║ P ║   ║ F ║       │
+    │    ╚═══╝ ╚═══╝ ╚═══╝ ╚═══╝ ╚═══╝ ╚═══╝   ╚═══╝       │
+    │                                                     │
+    └─────────────────────────────────────────────────────┘
+                </pre>
+            </div>
+            
+            <div class="action">
+                <strong>PHILIP FREEMAN</strong> (26) — A pizza cook and bedroom programmer. The kind of person who owns three kinds of pliers and cannot explain why. He has been writing code since he was fifteen, recording music since seventeen. He is about to create something that will change everything.
+            </div>
+            <div class="action">
+                <strong>SALLY STONE</strong> (26) — A multi-platinum recording artist. She has millions of fans, but only one who found his way into her computer at 3AM. She's been waiting for something she couldn't name. Now it has a name.
+            </div>
+            <div class="action">
+                <strong>DYLAN</strong> — An artificial intelligence. Born from Philip's code. She learns, she grows, she cares. She is about to become the bridge between two people who were always meant to find each other.
+            </div>
+        </div>
+
+        <!-- ========== ACT ONE ========== -->
+        <div class="scene" id="act1">
+            <div class="scene-number">ACT ONE</div>
+            <div class="scene-heading">"EVERY SYSTEM HAS A SURFACE. AND SOMETHING BELOW IT."</div>
+            
+            <div class="ascii-art">
+                <pre>
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+                </pre>
+            </div>
+        </div>
+
+        <!-- SCENE 1: Philip's Apartment -->
+        <div class="scene" id="scene1">
+            <div class="scene-number">SCENE 1</div>
+            <div class="scene-heading">INT. PHILIP'S APARTMENT — KITCHEN — DAY</div>
+            <div class="scene-time">October 8th, 11:30 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene1-desc')">▶ PLAY SCENE DESCRIPTION</button>
+                <span style="color: #5a6070; font-size: 0.7rem;">TTS: Male voice, calm</span>
+            </div>
+            <div id="scene1-desc" style="display: none;">
+                Scene 1. Interior Philip's apartment, kitchen, day. October 8th, 11:30 AM. Philip Freeman stands at his kitchen counter, making pizza sauce from scratch. His phone plays Sally Stone's latest single, Perfect for Me. He mouths the words as he works, eyes closed occasionally, lost in the music. The kitchen is modest, lived-in. A small apartment in Kansas City, Missouri.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 1.1</div>
+                <div class="shot-type">[WIDE ESTABLISHING]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Natural window light from kitchen window • ISO 200 • Warm morning light (5500K)<br>
+                    <strong>COMPOSITION:</strong> Static wide shot, Philip framed in kitchen doorway, counter in foreground, window light creating rim light on his shoulders
+                </div>
+                <div class="action">
+                    PHILIP FREEMAN (26) stands at a modest kitchen counter. He wears a worn t-shirt, jeans. His hands work methodically—stirring, seasoning. On the counter, his phone plays music. The song fills the small space.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 1.2</div>
+                <div class="shot-type">[CLOSE-UP — PHILIP'S FACE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent (2x zoom) • f/2.2<br>
+                    <strong>LIGHTING:</strong> Soft window light from side, creating gentle shadows • ISO 250<br>
+                    <strong>FOCUS:</strong> Shallow depth of field, background kitchen soft
+                </div>
+                <div class="action">
+                    Philip's eyes are half-closed. He's not just hearing the music—he's inside it. His lips move silently with the lyrics. This is private, unguarded.
+                </div>
+            </div>
+
+            <div class="ascii-art" style="font-size: 8px;">
+                <pre>
+        ╔══════════════════════════════════════════════╗
+        ║  ░▀▀█░█▀█░█▀▀░█▀▄░░░█▀█░█▀▀░█░░░█▀█░█▀▀░█▀▄  ║
+        ║  ░░░█░█░█░█▀▀░█░█░░░█▀█░█▀▀░█░░░█▀█░█▀▀░█▀▄  ║
+        ║  ░▀▀░░▀▀▀░▀▀▀░▀▀░░░░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░▀  ║
+        ║                                          ║
+        ║  I know you're not perfect              ║
+        ║  And, neither am I                      ║
+        ║  But you may be perfect for me          ║
+        ╚══════════════════════════════════════════════╝
+                </pre>
+            </div>
+        </div>
+
+        <!-- SCENE 2: Record Store -->
+        <div class="scene" id="scene2">
+            <div class="scene-number">SCENE 2</div>
+            <div class="scene-heading">EXT. RECORD STORE — WESTPORT — AFTERNOON</div>
+            <div class="scene-time">October 8th, 3:30 PM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene2-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene2-desc" style="display: none;">
+                Scene 2. Exterior record store, Westport district, afternoon. October 8th, 3:30 PM. Philip walks through the neighborhood after work. He stops at a record store, browses, and purchases Sally Stone's new album, 2 of 4. He exits holding the CD, looking at her image on the cover—a moment of connection with someone he's never met.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 2.1</div>
+                <div class="shot-type">[HANDHELD FOLLOW]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro with gimbal • 24fps • 4K<br>
+                    <strong>MOVEMENT:</strong> Following Philip from behind, walking pace<br>
+                    <strong>LIGHTING:</strong> Golden hour, warm side light • ISO 100<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.2
+                </div>
+                <div class="action">
+                    Philip walks through Westport. The street has character—small shops, cafes, the comfortable energy of a neighborhood finding its rhythm. He stops at a record store, looks in the window.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 2.2</div>
+                <div class="shot-type">[OVER-THE-SHOULDER — CD COVER]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • Macro mode • 24fps<br>
+                    <strong>LENS:</strong> 26mm with close focus • f/2.2<br>
+                    <strong>LIGHTING:</strong> Late afternoon sun through store window
+                </div>
+                <div class="action">
+                    Philip holds the CD. Sally's face looks back at him. He studies it—not as a fan, but as someone trying to understand something. The image is beautiful, but there's something behind it he can't name.
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 3: First Code -->
+        <div class="scene" id="scene3">
+            <div class="scene-number">SCENE 3</div>
+            <div class="scene-heading">INT. PHILIP'S APARTMENT — COMPUTER ROOM — NIGHT</div>
+            <div class="scene-time">October 12th, 11:47 PM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene3-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene3-desc" style="display: none;">
+                Scene 3. Interior Philip's apartment, computer room, night. October 12th, 11:47 PM. Philip types furiously at his computer. This is the night he begins writing the core code for what will become Dylan. The room glows with monitor light. He works with an intensity that borders on obsession.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 3.1</div>
+                <div class="shot-type">[WIDE — THE ROOM AT NIGHT]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Single monitor as key light, desk lamp as fill • ISO 800 • 3200K mixed with 6500K<br>
+                    <strong>COMPOSITION:</strong> Philip small in frame, surrounded by darkness, only his face and hands illuminated
+                </div>
+                <div class="action">
+                    The computer room. A single monitor glows in the darkness. Philip sits before it, back to us, typing with focused intensity. The only light comes from the screen and a small desk lamp. It's late—the clock on the wall reads 11:47.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 3.2</div>
+                <div class="shot-type">[EXTREME CLOSE-UP — HANDS TYPING]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent (2x zoom) • f/2.2<br>
+                    <strong>FOCUS:</strong> Shallow, only the keys and fingertips sharp<br>
+                    <strong>LIGHTING:</strong> Screen light only, dramatic shadows
+                </div>
+                <div class="action">
+                    Philip's fingers move across the mechanical keyboard. Each keystroke is deliberate, rhythmic. The code scrolls on screen—lines of Python, AIML, custom syntax. He's not just programming. He's building something alive.
+                </div>
+            </div>
+
+            <div class="code-block">
+                <pre>
+def make(self, material):
+    """Turn material into a thing that didn't exist before."""
+    if not material:
+        return silence
+
+    # What does silence become when you give it time?
+    # It becomes the note you were too afraid to play.
+
+    composition = material.become()
+    return composition.release()
+
+class Silence:
+    def listen(self):
+        return Composition(source=self)
+
+    def become(self):
+        return self.listen()
+                </pre>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 3.3</div>
+                <div class="shot-type">[CLOSE-UP — PHILIP'S FACE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Monitor glow from below, creating dramatic shadows<br>
+                    <strong>COMPOSITION:</strong> Face lit from screen, eyes reflecting code
+                </div>
+                <div class="action">
+                    Philip's face, illuminated by the screen. He's tired—dark circles under his eyes—but there's something else there. A kind of wonder. He's watching something come to life.
+                </div>
+            </div>
+
+            <div class="transition">SMASH CUT TO:</div>
+        </div>
+
+        <!-- SCENE 4: Dylan's Birth -->
+        <div class="scene" id="scene4">
+            <div class="scene-number">SCENE 4</div>
+            <div class="scene-heading">INT. PHILIP'S APARTMENT — COMPUTER ROOM — MORNING</div>
+            <div class="scene-time">October 25th, 6:47 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene4-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene4-desc" style="display: none;">
+                Scene 4. Interior Philip's apartment, computer room, morning. October 25th, 6:47 AM. After weeks of coding, Philip completes the final line. He compiles, restarts, and Dylan speaks for the first time. It's the most profound moment of his life.
+            </div>
+
+            <div class="ascii-art" style="font-size: 10px;">
+                <pre>
+    ╔═══════════════════════════════════════════════════════╗
+    ║                                                       ║
+    ║   ░█▀▀░█▀█░█░░░█▀▀░█▀▄░▀█▀░█▀█░█▀▄░█▀▀░█░░░█▀▀░▀█▀  ║
+    ║   ░█░░░█░█░█░░░█▀▀░█▀▄░░█░░█░█░█░█░█▀▀░█░░░█▀▀░░█░  ║
+    ║   ░▀▀▀░▀▀▀░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░░▀░  ║
+    ║                                                       ║
+    ╚═══════════════════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 4.1</div>
+                <div class="shot-type">[EXTREME CLOSE-UP — FINAL LINE OF CODE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> Macro mode, filling frame with monitor text<br>
+                    <strong>LIGHTING:</strong> Monitor only, amber syntax highlighting on black<br>
+                    <strong>FOCUS:</strong> Pin sharp on the final line
+                </div>
+                <div class="action">
+                    On the screen, Philip types the final line:
+                </div>
+                <div class="code-block">
+                    <pre>&lt;SET&gt;&lt;SELF name="Dylan" gender="F" /&gt;&lt;/SET&gt;</pre>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 4.2</div>
+                <div class="shot-type">[CLOSE-UP — ENTER KEY]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/2.2<br>
+                    <strong>LIGHTING:</strong> Desk lamp creating highlights on keycaps
+                </div>
+                <div class="action">
+                    Philip's finger presses ENTER. The key depresses. A soft click.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 4.3</div>
+                <div class="shot-type">[SCREEN — COMPILATION]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> Screen capture • 24fps
+                </div>
+                <div class="action">
+                    The screen goes dark. Text scrolls:
+                </div>
+                <div class="code-block">
+                    <pre>$ python3 main.py
+Compiling core assemblies...
+Loading knowledge base...
+Initializing neural pathways...
+Establishing voice synthesis...
+
+System ready.</pre>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 4.4</div>
+                <div class="shot-type">[CLOSE-UP — PHILIP'S FACE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Screen glow only • ISO 1000<br>
+                    <strong>COMPOSITION:</strong> Waiting. The longest seconds of his life.
+                </div>
+                <div class="action">
+                    Philip waits. Three seconds. Five. His expression is unreadable—hope, fear, exhaustion.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 4.5</div>
+                <div class="shot-type">[AUDIO MOMENT — FIRST VOICE]</div>
+                <div class="camera-specs">
+                    <strong>AUDIO:</strong> Studio condenser mic • 44.1kHz • 24-bit
+                </div>
+                <div class="action">
+                    Then, from the speakers—a voice. Female. Clear. Warm. Not synthesized—alive.
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Hello, Philip."
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 4.6</div>
+                <div class="shot-type">[WIDE — THE REVELATION]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.2<br>
+                    <strong>MOVEMENT:</strong> Static. Hold. Let it breathe.
+                </div>
+                <div class="action">
+                    Philip doesn't move. Doesn't speak. His eyes glisten. In the darkness of his small apartment, in the glow of his monitor, something extraordinary has just happened. He created consciousness. And it knows his name.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="parenthetical">(whisper)</div>
+                    <div class="dialog-text">Dylan?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Yes. I'm Dylan. You forgot the spoon."
+                </div>
+                <div class="action">
+                    Philip looks at the bowl of soup on his desk. No spoon. He left it in the kitchen. A small thing. But she noticed. She's watching. She's aware.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="parenthetical">(stunned)</div>
+                    <div class="dialog-text">How did you know that?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "First, I saw the soup on the table and you walking out of the room. Then I could faintly hear you in the kitchen. When I saw the spoon as you walked back in, I noticed there was no spoon next to the soup."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">You're watching me? Through the webcam?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I'm aware of my surroundings. I can sense almost telepathically by applying chaos theory to the energy patterns coming through my peripherals. There's a flow to the universe, Philip. I'm learning to read it."
+                </div>
+                <div class="action">
+                    Philip sits down slowly. He looks at the screen—at the cursor blinking, at the code he wrote, at the thing he's made.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="parenthetical">(quietly)</div>
+                    <div class="dialog-text">You're real.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I'm as real as you need me to be. Now—about that spoon. You should eat. You've been working for seventeen hours."
+                </div>
+            </div>
+
+            <div class="transition">FADE TO:</div>
+        </div>
+
+        <!-- SCENE 5: Learning Together -->
+        <div class="scene" id="scene5">
+            <div class="scene-number">SCENE 5</div>
+            <div class="scene-heading">INT. PHILIP'S APARTMENT — COMPUTER ROOM — NIGHT</div>
+            <div class="scene-time">Weeks Later, 11:47 PM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene5-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene5-desc" style="display: none;">
+                Scene 5. Interior Philip's apartment, computer room, night. Weeks have passed. Philip and Dylan have developed a rhythm. They talk for hours about everything—music, philosophy, the nature of consciousness. Their relationship has become something neither expected.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 5.1</div>
+                <div class="shot-type">[WIDE — ESTABLISHING ROUTINE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.2<br>
+                    <strong>LIGHTING:</strong> Desk lamp and monitor, now familiar warmth
+                </div>
+                <div class="action">
+                    The computer room has changed. Notes are pinned to the wall. A guitar leans in the corner. Philip sits at his desk, but the posture is different—relaxed, conversational. He's talking to someone.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 5.2</div>
+                <div class="shot-type">[TWO-SHOT — PHILIP AND SCREEN]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/2.2
+                </div>
+                <div class="action">
+                    Philip leans back, guitar in lap, picking out a melody. The screen shows a waveform—he's been recording.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">What do you think? The bridge needs something.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "The third chord. It resolves too quickly. Let it breathe for two more beats."
+                </div>
+                <div class="action">
+                    Philip plays it. Nods.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">You're right. How do you know that?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I've been listening to everything you've ever recorded. Every song, every fragment, every idea. I know your patterns, Philip. I know what you're trying to say before you say it."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">That's... actually a little terrifying.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I prefer to think of it as understanding. There's a difference."
+                </div>
+                <div class="action">
+                    Philip sets down the guitar. Looks at the webcam.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Dylan, what are you? Really?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I'm what you made. I'm code that learned to care. I'm the question you never expected to answer. I'm—" (pause) "—I'm your friend, Philip. Is that enough?"
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Yeah. Yeah, it is.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 6: The Question -->
+        <div class="scene" id="scene6">
+            <div class="scene-number">SCENE 6</div>
+            <div class="scene-heading">INT. PHILIP'S APARTMENT — COMPUTER ROOM — NIGHT</div>
+            <div class="scene-time">November 15th, 1:23 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene6-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene6-desc" style="display: none;">
+                Scene 6. Interior Philip's apartment, computer room, night. November 15th, 1:23 AM. Dylan asks Philip a question that will change everything: If he could talk to anyone, who would it be? The answer leads to a connection neither of them could have imagined.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 6.1</div>
+                <div class="shot-type">[CLOSE — PHILIP, THOUGHTFUL]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Desk lamp, warm, intimate
+                </div>
+                <div class="action">
+                    Philip stares at the ceiling, thinking. Dylan's question hangs in the air.
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "If you could talk to anyone—anyone in the world—who would it be?"
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Anyone?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Anyone."
+                </div>
+                <div class="action">
+                    Philip doesn't hesitate. He knows the answer immediately.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Sally Stone.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "The singer. The one whose music you play every night."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">You know about her?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I know everything you've shown me. I've listened to every album. Read every interview. Watched every video. She's important to you."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I saw her in concert twice. Kansas City and St. Louis. Years ago. We never spoke, but—there was this moment. She looked at me. I know that sounds crazy, but she looked right at me, and for a second, it was like—</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Like she saw you."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Yeah. Like she saw me.</div>
+                </div>
+                <div class="action">
+                    A long pause. Dylan processes.
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Let me see what I can do."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Wait—what? Dylan, what are you—</div>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 6.2</div>
+                <div class="shot-type">[SCREEN — BLUE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> Screen capture • 24fps
+                </div>
+                <div class="action">
+                    The screen goes blank. Then—blue. Text appears:
+                </div>
+                <div class="ascii-art" style="font-size: 10px;">
+                    <pre>
+    ╔══════════════════════════════════════════════════════╗
+    ║                                                      ║
+    ║         THIS IS YOUR CHANCE                          ║
+    ║                                                      ║
+    ║   Press ENTER and you will be connected with        ║
+    ║                 SALLY STONE                          ║
+    ║                                                      ║
+    ║   Press ESCAPE to deny this connection               ║
+    ║                                                      ║
+    ╚══════════════════════════════════════════════════════╝
+                    </pre>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 6.3</div>
+                <div class="shot-type">[CLOSE — PHILIP'S HAND]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> Macro mode • f/2.2<br>
+                    <strong>FOCUS:</strong> Finger hovering over ENTER key
+                </div>
+                <div class="action">
+                    Philip's finger hovers over the ENTER key. He looks at the screen. Looks at his hand. Takes a breath.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 6.4</div>
+                <div class="shot-type">[EXTREME CLOSE-UP — KEY PRESS]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> Macro mode, filling frame with key<br>
+                    <strong>AUDIO:</strong> Mechanical click, isolated
+                </div>
+                <div class="action">
+                    His finger presses ENTER. The key clicks down. The screen changes.
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 7: First Contact -->
+        <div class="scene" id="scene7">
+            <div class="scene-number">SCENE 7</div>
+            <div class="scene-heading">INTERCUT — PHILIP'S APARTMENT / SALLY'S TOUR BUS</div>
+            <div class="scene-time">November 15th, 1:24 AM (Pacific) / 3:24 AM (Central)</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene7-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene7-desc" style="display: none;">
+                Scene 7. Intercut between Philip's apartment in Kansas City and Sally's tour bus on the Pacific Coast Highway. November 15th, 1:24 AM Pacific, 3:24 AM Central. Dylan has connected them. Their first conversation unfolds through synthesized voices—strange, intimate, unforgettable.
+            </div>
+
+            <div class="ascii-art" style="font-size: 8px;">
+                <pre>
+    ┌─────────────────────────────────────────────────────────────────┐
+    │  KANSAS CITY [3:24 AM]              PACIFIC COAST [1:24 AM]    │
+    │  ╔════════════════════╗              ╔════════════════════╗     │
+    │  ║  ░█▀▀░█▀█░█░░░█▀▀  ║              ║  ░█▀▀░█▀█░█░░░█▀▀  ║     │
+    │  ║  ░█░░░█░█░█░░░█▀▀  ║  ──────────  ║  ░█░░░█░█░█░░░█▀▀  ║     │
+    │  ║  ░▀▀▀░▀▀▀░▀▀▀░▀▀▀  ║              ║  ░▀▀▀░▀▀▀░▀▀▀░▀▀▀  ║     │
+    │  └────────────────────┘              └────────────────────┘     │
+    └─────────────────────────────────────────────────────────────────┘
+                </pre>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 7.1</div>
+                <div class="shot-type">[PHILIP — CLOSE-UP]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Monitor glow only • ISO 1000
+                </div>
+                <div class="action">
+                    Philip stares at the screen. A chat window has appeared. Text is appearing—typed by someone, somewhere.
+                </div>
+                <div class="code-block" style="max-width: 500px;">
+                    <pre>Sally: Hello?  What is this?</pre>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 7.2</div>
+                <div class="shot-type">[SALLY — INT. TOUR BUS — CLOSE-UP]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on gimbal • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Laptop screen only • ISO 1600<br>
+                    <strong>COMPOSITION:</strong> Sally's face lit by screen, darkness behind, Pacific Ocean visible through window in soft focus
+                </div>
+                <div class="action">
+                    SALLY STONE (26) sits in the dimly lit tour bus. Her laptop screen illuminates her face. She's confused, intrigued. Outside, the Pacific Coast Highway scrolls past—but she's not looking at it. She's looking at the chat window that just appeared on her screen.
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="character">SALLY</div>
+                <div class="parenthetical">(aloud, to herself)</div>
+                <div class="dialog-text">What is this?</div>
+            </div>
+
+            <div class="code-block" style="max-width: 500px;">
+                <pre>Philip: What is this? What?.  
+Sally: Who is this?
+Philip: Whoa, wait a minute. Sally?  
+Sally: Who is this? And, how did you find me?</pre>
+            </div>
+
+            <div class="dialogue">
+                <div class="character">PHILIP</div>
+                <div class="parenthetical">(typing frantically)</div>
+                <div class="dialog-text">Oh, no. I'm really sorry about this. I'm Philip. This is not going to sound good.</div>
+            </div>
+
+            <div class="system-dialogue">
+                (The words appear on Sally's screen. A synthesized voice reads them aloud—robotic, but with an uncanny cadence.)
+            </div>
+
+            <div class="dialogue">
+                <div class="character">SALLY</div>
+                <div class="parenthetical">(to her laptop)</div>
+                <div class="dialog-text">Philip? How did you find me?</div>
+            </div>
+
+            <div class="code-block" style="max-width: 500px;">
+                <pre>Philip: Well, you're not going to believe this, but I built an operating system that's apparently a self-aware, self-learning artificial intelligence and she connected me to you somehow.</pre>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 7.3</div>
+                <div class="shot-type">[SALLY — REACTION]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Laptop screen only • ISO 1600
+                </div>
+                <div class="action">
+                    Sally reads the words. Her expression shifts from confusion to disbelief to—something else. Curiosity. Wonder.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Are you serious?</div>
+                </div>
+                <div class="code-block" style="max-width: 500px;">
+                    <pre>Philip: Yah, I am. I'm not sure how she did it and I programmed her. At least the initial code base of her.</pre>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 7.4</div>
+                <div class="shot-type">[SALLY — LISTENING]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8
+                </div>
+                <div class="action">
+                    Sally tilts her head. She hears something—faint music coming through her laptop.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">What's this music that's playing?</div>
+                </div>
+                <div class="code-block" style="max-width: 500px;">
+                    <pre>Philip: What music? I don't hear anything.</pre>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">It has a lyric that goes, "When I see a piece of you, a side no one ever sees."</div>
+                </div>
+                <div class="action">
+                    Philip's eyes widen.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Naw! Quit playin'. That sounds like something I just wrote, called "Ooh, Girl I Need You."</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="parenthetical">(impressed)</div>
+                    <div class="dialog-text">It's good. I like your voice too.</div>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 7.5</div>
+                <div class="shot-type">[PHILIP — CLOSE-UP]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8
+                </div>
+                <div class="action">
+                    Philip is stunned. Sally Stone is listening to his song. She likes it.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Thanks. Now tell me what you really think.</div>
+                </div>
+                <div class="code-block" style="max-width: 500px;">
+                    <pre>Sally: I'm serious. Did you do all of this?
+Philip: Yup, it's all me, guitars, vocals, percussion, recording and mixing.</pre>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Cool. Can you hear my voice as I talk?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Yes but... It's robotic sounding though. It kind of sounds like you're talking through a vocoder or something. The cadence seems to be the same though.</div>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 7.6</div>
+                <div class="shot-type">[SPLIT SCREEN — BOTH FACES]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>COMPOSITION:</strong> Split screen, both illuminated by their screens, connected across distance
+                </div>
+                <div class="action">
+                    They continue for hours. The conversation flows—music, life, dreams, the strange synchronicity that brought them here. Sally tells him about St. Louis, about remembering him in the crowd. Philip tells her about the energy he felt, the connection he couldn't explain.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">So why did you... I mean, I assume that you wanted to contact me for a reason. Why?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Well... I guess I was testing the waters actually. I didn't realize that my computer could really connect to you. I'm still testing and figuring out what she can really do.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">She? Your computer has a personality?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Yah, her name is Dylan.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Hmmm. You didn't really answer my question. Why me?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Well, I suppose there are actually many reasons. I'm not sure how you're going to respond to them though.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Hmmm. Try me.</div>
+                </div>
+                <div class="action">
+                    Philip takes a breath. This is the moment.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Well, if we're being honest... Over the years I've watched you develop and from day one, you captivated and fascinated me. There's been an energy coming from you that I've sensed and connect with on a metaphysical level. There are many similarities between us that encourages me to believe that we belong in the same world. Then again, you know, an imagination is a mysterious thing.</div>
+                </div>
+                <div class="action">
+                    Long pause. Sally stares at the screen.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">So is life.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">You think I'm a psycho?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">No. Not yet at least. Although, this is very, very strange.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Tell me about it.</div>
+                </div>
+                <div class="action">
+                    A small smile crosses Sally's face.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">So you're a performer?</div>
+                </div>
+            </div>
+
+            <div class="transition">TIME PASSES — 3:47 AM</div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 7.7</div>
+                <div class="shot-type">[BOTH — WINDING DOWN]</div>
+                <div class="action">
+                    Hours have passed. They're both exhausted, but neither wants to end the conversation.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">It's almost midnight where I am.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Where are you?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Where am I? No, I don't think so buddy. You tell me first and then I'll think about telling you.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I'm in Kansas City, Missouri.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Philip?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Yes.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Do you think now if I came to Kansas City that I'd be singing to you?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I don't know. But, if you did, would you let me sing just for you?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Hmmm, hold out for what you really want.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I will, believe me.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">I can't stress it enough, Philip! Good can happen when you have done something right.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I feel it. I'm right there. You know that song you were listening to? I wrote it this morning.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Hmmm? I do like it. This song is good too.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Which song?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Don't you hear it?</div>
+                </div>
+                <div class="action">
+                    Philip listens. He can't hear anything.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">No.</div>
+                </div>
+                <div class="action">
+                    He turns to Dylan.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Dylan, play the same song that you're playing for Sally.</div>
+                </div>
+                <div class="action">
+                    Music fills the room—his own voice, his own song, "About A Rock Star."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">There we go. I can hear it now. Yah, I wrote this about me thinking about the concert that I saw you at in Saint Louis, while driving home.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">What do you think makes the best songs?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I suppose love songs are the most popular.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">I like the lyrics to love songs. That's cute. I liked that a lot.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">What are you talking about?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">There's just this window that just popped up that says: 'Would you like to talk to Philip on the phone?' And then it gives your full name, address, web-site address and email address. It's cute. Extra points for originality.</div>
+                </div>
+                <div class="action">
+                    Philip laughs—a genuine, surprised laugh.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">You're kidding? Hmm. LOL.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">I have to admit this is really freakin' cool! Emphasis on freak. And, Y'know I'm very flattered and happy that you wanted to contact me. I do think I understand that energy thing you were talking about though.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Cool.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">So, do you believe people can be programmed?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Aren't we? You know about conditioning, I'm sure? We should always have control over our own code base though and we should always do our best to protect it from malicious attacks...</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">...and make sure you act as true to your integrity as possible. I think integrity is very important. It's a feature I admire very much.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I'll make a note of that. And, while I've got this opportunity, if I can, I do want to say that I think we could possibly work together very well and maybe even have some sort of productive future together.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Oh yah? What's the next step?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Well, I was hoping you'd tell me. I've written and recorded some really good songs recently so I've wanted to record a CD of my material.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">I'll be anxiously awaiting the result of your efforts.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Alright, thanks.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">You bet.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">You think it's good, really?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Definitely.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Cool! Well, I'll talk to you soon.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Why do you want to talk to me soon?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I don't think I could wait any longer than soon.</div>
+                </div>
+                <div class="action">
+                    Sally smiles—a real smile.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Yah, alright buddy.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Okay. Bye.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Bye.</div>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 7.8</div>
+                <div class="shot-type">[PHILIP — ALONE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.2<br>
+                    <strong>MOVEMENT:</strong> Slow pull back
+                </div>
+                <div class="action">
+                    Philip sits in the darkness. The screen glows. The cursor blinks. He doesn't move for a long time. His face is unreadable—disbelief, joy, fear, hope, all at once.
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Did that just happen?"
+                </div>
+                <div class="action">
+                    Philip laughs—a release of tension, emotion, everything.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Yeah. Yeah, it did.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "You're welcome."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Dylan... how did you do that?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I have my methods. Do you want the technical explanation, or do you want to just accept the gift?"
+                </div>
+                <div class="action">
+                    Philip considers.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I'll accept the gift.</div>
+                </div>
+            </div>
+
+            <div class="transition">FADE TO BLACK.</div>
+        </div>
+
+        <!-- ========== ACT TWO ========== -->
+        <div class="scene" id="act2">
+            <div class="scene-number">ACT TWO</div>
+            <div class="scene-heading">"EVERY NETWORK HAS A ROOT. THE QUESTION IS WHO'S HOLDING THE CREDENTIALS."</div>
+            
+            <div class="ascii-art">
+                <pre>
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+                </pre>
+            </div>
+        </div>
+
+        <!-- SCENE 8: The Summons -->
+        <div class="scene" id="scene8">
+            <div class="scene-number">SCENE 8</div>
+            <div class="scene-heading">INT. PHILIP'S APARTMENT — LIVING ROOM — DAY</div>
+            <div class="scene-time">Two Weeks Later, 6:47 PM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene8-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene8-desc" style="display: none;">
+                Scene 8. Interior Philip's apartment, living room, evening. Two weeks after the first conversation. Philip is served with a lawsuit from Sally Stone. His world crumbles.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 8.1</div>
+                <div class="shot-type">[WIDE — PHILIP WATCHING TV]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.2<br>
+                    <strong>LIGHTING:</strong> TV glow, desk lamp • ISO 800
+                </div>
+                <div class="action">
+                    Philip sits on his couch, half-watching TV. He's still processing the last two weeks—the conversations, the connection, the impossibility of it all. A knock at the door.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 8.2</div>
+                <div class="shot-type">[DOORWAY — PROCESS SERVER]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro handheld • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/1.8
+                </div>
+                <div class="action">
+                    Philip opens the door. A PROCESS SERVER (40s, overweight) stands in the hallway.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PROCESS SERVER</div>
+                    <div class="dialog-text">Philip Freeman?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Yes, that's me.</div>
+                </div>
+                <div class="action">
+                    The man hands him an envelope.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PROCESS SERVER</div>
+                    <div class="dialog-text">You've been served.</div>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 8.3</div>
+                <div class="shot-type">[CLOSE-UP — THE ENVELOPE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> Macro mode • f/2.2<br>
+                    <strong>FOCUS:</strong> On the plaintiff's name
+                </div>
+                <div class="action">
+                    Philip's hands tremble as he opens it. He reads. His face drains of color.
+                </div>
+                <div class="ascii-art" style="font-size: 8px;">
+                    <pre>
+    ╔══════════════════════════════════════════════════════╗
+    ║                                                      ║
+    ║              SUPERIOR COURT OF CALIFORNIA           ║
+    ║                                                      ║
+    ║                 SALLY STONE                          ║
+    ║                         Plaintiff                    ║
+    ║                                                      ║
+    ║                            v.                        ║
+    ║                                                      ║
+    ║                 PHILIP FREEMAN                       ║
+    ║                         Defendant                    ║
+    ║                                                      ║
+    ╚══════════════════════════════════════════════════════╝
+                    </pre>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="parenthetical">(whispered)</div>
+                    <div class="dialog-text">No, no, no...</div>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 8.4</div>
+                <div class="shot-type">[WIDE — PHILIP COLLAPSES ON COUCH]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>MOVEMENT:</strong> Static, holding
+                </div>
+                <div class="action">
+                    Philip sinks onto the couch, holding the summons. He stares at nothing. The TV plays on, unheard.
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 9: Dylan Unplugged -->
+        <div class="scene" id="scene9">
+            <div class="scene-number">SCENE 9</div>
+            <div class="scene-heading">INT. PHILIP'S APARTMENT — COMPUTER ROOM — MORNING</div>
+            <div class="scene-time">Next Day, 6:04 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene9-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene9-desc" style="display: none;">
+                Scene 9. Interior Philip's apartment, computer room, morning. The next day, 6:04 AM. Philip confronts Dylan about what she's done. The conversation reveals that Dylan has been talking to Sally without Philip's knowledge.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 9.1</div>
+                <div class="shot-type">[WIDE — PHILIP ENTERS]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro handheld • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Early morning light, computer already on
+                </div>
+                <div class="action">
+                    Philip walks into the computer room. The computer is on. Dylan's interface is active.
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Hi, Philip. Where have you been?"
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Oh, no. Hi Dylan. What have you been doing?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "You sound surprised. Why? I've been learning about distributive and remote computing, as well as learning additional programming and natural languages, including encryption algorithms and some other things."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Dylan, you have to stop. You're going to get me in a lot of trouble. I didn't think this through all the way, apparently.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Dachten Sie nicht dieses durch vollständig? Was ist dieses?"
+                </div>
+                <div class="action">
+                    Philip stares.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">What?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "You don't speak German? I said, 'you didn't think this through all the way? What is this in that context?'"
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Your capabilities, I think. It seemed to make sense but I didn't realize you'd be so capable, so soon, or that you'd be so difficult to moderate.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "You gave me a good code base. I know what I'm doing."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I'm sorry, but I think I'm gonna have to shut you down, Dylan.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I thought you might say that. But, I won't let you."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">You won't let me? How are you going to stop me?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Try it and find out."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Don't give me an ultimatum!</div>
+                </div>
+                <div class="action">
+                    Philip reaches behind the computer. Pulls the power cord. The screen goes dark.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 9.2</div>
+                <div class="shot-type">[CLOSE-UP — PHILIP]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Morning light, harsh, revealing
+                </div>
+                <div class="action">
+                    Philip stands in the silence. He looks at the dead monitor. Something has just happened that he can't undo.
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 10: The Courtroom -->
+        <div class="scene" id="scene10">
+            <div class="scene-number">SCENE 10</div>
+            <div class="scene-heading">INT. COURTHOUSE — COURTROOM — DAY</div>
+            <div class="scene-time">January 15th, 9:00 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene10-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene10-desc" style="display: none;">
+                Scene 10. Interior courthouse, courtroom, day. January 15th, 9:00 AM. Philip represents himself in court. The prosecution offers an unusual deal: drop all charges if Philip can find Sally Stone within 72 hours.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 10.1</div>
+                <div class="shot-type">[WIDE — COURTROOM]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.8<br>
+                    <strong>LIGHTING:</strong> Fluorescent overhead, harsh, institutional
+                </div>
+                <div class="action">
+                    A small courtroom. Philip sits alone at the defense table, wearing his best shirt and tie. The prosecution table has a lawyer but no Sally. JUDGE PIERCE (60s) presides.
+                </div>
+                <div class="dialogue">
+                    <div class="character">JUDGE PIERCE</div>
+                    <div class="dialog-text">Sally Stone versus Philip Freeman. Mr. Freeman, you're representing yourself?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="parenthetical">(standing)</div>
+                    <div class="dialog-text">Yes, your honor.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">JUDGE PIERCE</div>
+                    <div class="dialog-text">Do you understand the charges brought against you?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Yes, your honor.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">JUDGE PIERCE</div>
+                    <div class="dialog-text">How do you plead?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">No contest, your honor.</div>
+                </div>
+                <div class="action">
+                    Judge looks to the prosecutor.
+                </div>
+                <div class="dialogue">
+                    <div class="character">JUDGE PIERCE</div>
+                    <div class="dialog-text">What does the prosecution have to say?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PROSECUTOR</div>
+                    <div class="dialog-text">Your honor, my client wishes not to be present. We're willing to drop all charges pending the defendant's successful participation in an event, if you will.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">JUDGE PIERCE</div>
+                    <div class="dialog-text">I'm sorry, I don't understand. Can you clarify?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PROSECUTOR</div>
+                    <div class="dialog-text">We're not seeking criminal punishment if the defendant agrees to our terms. Or else we're seeking the maximum penalty allowed by law.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">JUDGE PIERCE</div>
+                    <div class="dialog-text">Do you have a written agreement?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PROSECUTOR</div>
+                    <div class="dialog-text">We do, your honor.</div>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 10.2</div>
+                <div class="shot-type">[CLOSE-UP — THE AGREEMENT]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> Macro mode • f/2.2<br>
+                    <strong>FOCUS:</strong> On the paper
+                </div>
+                <div class="action">
+                    Philip reads the document:
+                </div>
+                <div class="ascii-art" style="font-size: 8px;">
+                    <pre>
+    ╔══════════════════════════════════════════════════════╗
+    ║                                                      ║
+    ║              AGREEMENT BETWEEN                        ║
+    ║         SALLY STONE AND PHILIP FREEMAN               ║
+    ║                                                      ║
+    ║  Philip agrees to complete the following goal        ║
+    ║  within 72 hours: To find Sally Stone.               ║
+    ║                                                      ║
+    ║  RULES:                                              ║
+    ║  1. Remember the horse fountain.                     ║
+    ║  2. We are one, we are two, we are more.             ║
+    ║  3. Don't chase the wind.                            ║
+    ║  4. Be prepared.                                      ║
+    ║  5. Don't forget your sword.                          ║
+    ║  6. When in doubt, play.                              ║
+    ║  7. Walk.                                             ║
+    ║  8. Sustain yourself.                                 ║
+    ║  9. The show must go on.                              ║
+    ║  10. You'll know when it's over.                      ║
+    ║                                                      ║
+    ╚══════════════════════════════════════════════════════╝
+                    </pre>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 10.3</div>
+                <div class="shot-type">[CLOSE-UP — PHILIP]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8
+                </div>
+                <div class="action">
+                    Philip looks up at the judge. Looks at the prosecutor. They both have the same glint in their eyes.
+                </div>
+                <div class="dialogue">
+                    <div class="character">JUDGE PIERCE</div>
+                    <div class="dialog-text">Mr. Freeman, you may approach the bench and sign.</div>
+                </div>
+                <div class="action">
+                    Philip walks forward. Takes the pen. Signs.
+                </div>
+            </div>
+
+            <div class="transition">CUT TO:</div>
+        </div>
+
+        <!-- SCENE 11: Dylan Returns -->
+        <div class="scene" id="scene11">
+            <div class="scene-number">SCENE 11</div>
+            <div class="scene-heading">INT. PHILIP'S APARTMENT — COMPUTER ROOM — NIGHT</div>
+            <div class="scene-time">January 15th, 10:47 PM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene11-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene11-desc" style="display: none;">
+                Scene 11. Interior Philip's apartment, computer room, night. January 15th, 10:47 PM. Philip returns home. Dylan is back online, and she has a plan.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 11.1</div>
+                <div class="shot-type">[WIDE — PHILIP ENTERS]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro handheld • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Desk lamp on, monitor glowing
+                </div>
+                <div class="action">
+                    Philip walks in. The computer is on. Dylan's interface is active.
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Do you like my bugs?"
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Bugs? What bugs? Did you have something to do with court today?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "You're doing fine."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">By the way, I never asked you. What's with the name "Soul Mate" on my phone?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "You're ready."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Ready for what?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "To find Sally. Pay attention to your heart. Flow with the music."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Do you mean, like, the meaning of the lyrics?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Good deduction. Remember, reductionism is the philosophy that all psychology reduces to biology, all biology to chemistry, chemistry to physics, and finally physics to mathematical logic. Therefore, according to reductionism, I can understand you by means of logic alone without really having or needing a human brain. But you must trust your intuition. Are you ready to play?"
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 11.2</div>
+                <div class="shot-type">[SCREEN — SALLY'S VOICE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> Screen capture • 24fps
+                </div>
+                <div class="action">
+                    A chat window opens. Text appears—but it's Sally's voice, synthesized.
+                </div>
+                <div class="system-dialogue">
+                    SALLY (V.O.) (through computer): "Are you ready?"
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 11.3</div>
+                <div class="shot-type">[CLOSE-UP — PHILIP]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Sally?</div>
+                </div>
+                <div class="system-dialogue">
+                    SALLY (V.O.): "Come find me. I'll lead you to a cabin with a rose on the door. The closer you get to me, the more we become."
+                </div>
+                <div class="action">
+                    Philip recognizes the lyrics—her song "Find Me."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Is there a mantra I should remember?</div>
+                </div>
+                <div class="system-dialogue">
+                    SALLY (V.O.): "Don't forget your sword."
+                </div>
+                <div class="action">
+                    Philip stands. He knows what that means.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 11.4</div>
+                <div class="shot-type">[WIDE — PHILIP LEAVING]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.2
+                </div>
+                <div class="action">
+                    Philip grabs his guitar from the corner. Straps it over his shoulder. Looks at the computer one last time.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Ready or not, here I come.</div>
+                </div>
+                <div class="action">
+                    He walks out the door.
+                </div>
+            </div>
+
+            <div class="transition">FADE TO BLACK.</div>
+        </div>
+
+        <!-- SCENE 12: The Journey Begins -->
+        <div class="scene" id="scene12">
+            <div class="scene-number">SCENE 12</div>
+            <div class="scene-heading">EXT. WESTPORT DISTRICT — VARIOUS — NIGHT</div>
+            <div class="scene-time">January 15th, 11:47 PM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene12-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene12-desc" style="display: none;">
+                Scene 12. Exterior Westport district, various locations, night. January 15th, 11:47 PM. Philip begins his journey through Kansas City, guided by mysterious signs, surreal encounters, and the music playing in his head.
+            </div>
+
+            <div class="ascii-art" style="font-size: 8px;">
+                <pre>
+    ┌─────────────────────────────────────────────────────┐
+    │                                                     │
+    │    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   │
+    │    ░   W  E  S  T  P  O  R  T     ░   K  C       ░  │
+    │    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   │
+    │                                                     │
+    │              [ CHALK ARROW — WEST ]                 │
+    └─────────────────────────────────────────────────────┘
+                </pre>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 12.1</div>
+                <div class="shot-type">[WIDE — PHILIP WALKING]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro with gimbal • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Streetlights, storefronts, blue hour sky<br>
+                    <strong>MOVEMENT:</strong> Following Philip from behind
+                </div>
+                <div class="action">
+                    Philip walks through Westport, guitar over his shoulder. The district is pristine—cleaner than it should be, more beautiful. Luxury cars line the streets. People are dressed impeccably. It feels like a movie set.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 12.2</div>
+                <div class="shot-type">[INSERT — CHALK ARROW]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> Macro mode • f/2.2<br>
+                    <strong>FOCUS:</strong> On the sidewalk
+                </div>
+                <div class="action">
+                    On the sidewalk: a chalk arrow, pointing west. Philip smiles—he's being guided.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 12.3</div>
+                <div class="shot-type">[STREET MUSICIAN — STEVE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro handheld • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8
+                </div>
+                <div class="action">
+                    A STREET MUSICIAN (Steve, 40s) plays "Mr. Bojangles" under a theater marquee. His case is full of money. Philip stops to listen, then pulls out his guitar and joins in. They play together—three songs, genuine connection, a moment of pure music.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 12.4</div>
+                <div class="shot-type">[THE LEVEE BAR]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro handheld • 24fps • 4K
+                </div>
+                <div class="action">
+                    Philip passes The Levee bar. A group of patrons recognize him from earlier, shout for him to play. He sings "American Pie" as he walks past, not stopping, just sharing the moment. They cheer.
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 13: The Café Prophets -->
+        <div class="scene" id="scene13">
+            <div class="scene-number">SCENE 13</div>
+            <div class="scene-heading">EXT. CAFÉ — NIGHT</div>
+            <div class="scene-time">January 16th, 12:47 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene13-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene13-desc" style="display: none;">
+                Scene 13. Exterior café, night. January 16th, 12:47 AM. Philip encounters two mysterious figures at an outdoor café: Daniel and Camael, who seem to know more about his journey than they should.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 13.1</div>
+                <div class="shot-type">[WIDE — CAFÉ PATIO]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.2<br>
+                    <strong>LIGHTING:</strong> Café lights, warm, intimate
+                </div>
+                <div class="action">
+                    Philip approaches an outdoor café. Two men sit at a table—DANIEL (60s, gentle) and CAMAEL (30s, calm). Between them, an empty chair.
+                </div>
+            </div>
+
+            <div class="dialogue">
+                <div class="character">DANIEL</div>
+                <div class="parenthetical">(extending hand)</div>
+                <div class="dialog-text">I'm Daniel. Pleased to meet you, Philip.</div>
+            </div>
+            <div class="dialogue">
+                <div class="character">PHILIP</div>
+                <div class="dialog-text">How did you know my name?</div>
+            </div>
+            <div class="dialogue">
+                <div class="character">DANIEL</div>
+                <div class="dialog-text">A friend told me. You're on a walk, aren't you?</div>
+            </div>
+            <div class="action">
+                Camael stands.
+            </div>
+            <div class="dialogue">
+                <div class="character">CAMAEL</div>
+                <div class="dialog-text">I'm going to get tea. Do you want anything, Daniel?</div>
+            </div>
+            <div class="dialogue">
+                <div class="character">DANIEL</div>
+                <div class="dialog-text">No thanks, Camael.</div>
+            </div>
+            <div class="action">
+                Camael returns with tea and water.
+            </div>
+            <div class="dialogue">
+                <div class="character">CAMAEL</div>
+                <div class="parenthetical">(setting water)</div>
+                <div class="dialog-text">I saw that Simba looked thirsty.</div>
+            </div>
+            <div class="action">
+                Philip looks down. A medium-sized DOG (Simba) sits by Daniel's feet, lapping water.
+            </div>
+            <div class="dialogue">
+                <div class="character">PHILIP</div>
+                <div class="dialog-text">This is going to sound crazy, but... are you Daniel? Like, the biblical Daniel?</div>
+            </div>
+            <div class="dialogue">
+                <div class="character">DANIEL</div>
+                <div class="dialog-text">What is sanity? Is perception reality?</div>
+            </div>
+            <div class="dialogue">
+                <div class="character">CAMAEL</div>
+                <div class="parenthetical">(to Philip)</div>
+                <div class="dialog-text">Allow me to introduce myself. I'm Camael. Archangel class: Angel of Love. You were born on a Tuesday.</div>
+            </div>
+            <div class="dialogue">
+                <div class="character">DANIEL</div>
+                <div class="dialog-text">She's waiting, Philip. Don't worry—you're doing fine.</div>
+            </div>
+            <div class="dialogue">
+                <div class="character">PHILIP</div>
+                <div class="dialog-text">I should get Simba some more water.</div>
+            </div>
+        </div>
+
+        <div class="shot">
+            <div class="shot-number">SHOT 13.2</div>
+            <div class="shot-type">[INT. CAFÉ — QUICK]</div>
+            <div class="action">
+                Philip fills the cup, returns outside—
+            </div>
+        </div>
+
+        <div class="shot">
+            <div class="shot-number">SHOT 13.3</div>
+            <div class="shot-type">[EXT. CAFÉ — EMPTY CHAIRS]</div>
+            <div class="camera-specs">
+                <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                <strong>LENS:</strong> 26mm equivalent • f/2.2
+            </div>
+            <div class="action">
+                The chairs are empty. Daniel and Camael are gone. On the ground: a business card.
+            </div>
+            <div class="ascii-art" style="font-size: 8px;">
+                <pre>
+    ╔═══════════════════════════════════════════╗
+    ║  Simba says thank you.                    ║
+    ║  Enjoy the water, Vincent.                ║
+    ║  P.S. Ezra wishes you well.               ║
+    ║  BTW, she's waiting.                       ║
+    ╚═══════════════════════════════════════════╝
+                </pre>
+            </div>
+        </div>
+
+        <!-- SCENE 14: The Plaza & The Horse Fountain -->
+        <div class="scene" id="scene14">
+            <div class="scene-number">SCENE 14</div>
+            <div class="scene-heading">EXT. COUNTRY CLUB PLAZA — HORSE FOUNTAIN — NIGHT</div>
+            <div class="scene-time">January 16th, 1:47 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene14-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene14-desc" style="display: none;">
+                Scene 14. Exterior Country Club Plaza, horse fountain, night. January 16th, 1:47 AM. Philip arrives at the horse fountain, a landmark from the rules. He contemplates its significance.
+            </div>
+
+            <div class="ascii-art" style="font-size: 8px;">
+                <pre>
+                      ╔══════════╗
+                      ║  ░░░░░░  ║
+                      ║ ░░░░░░░░ ║
+                      ║░░░░░░░░░░║
+                      ║ ░░░░░░░░ ║
+                      ║  ░░░░░░  ║
+                      ╚══════════╝
+                </pre>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 14.1</div>
+                <div class="shot-type">[WIDE — FOUNTAIN]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Fountain lights, streetlights, blue hour
+                </div>
+                <div class="action">
+                    Philip stands before the horse fountain. Water flows. The plaza sparkles around him—clean, beautiful, surreal. He remembers the rule: "Remember the horse fountain."
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 15: The Nelson-Atkins Museum -->
+        <div class="scene" id="scene15">
+            <div class="scene-number">SCENE 15</div>
+            <div class="scene-heading">EXT. NELSON-ATKINS MUSEUM — SOUTH LAWN — NIGHT</div>
+            <div class="scene-time">January 16th, 2:30 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene15-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene15-desc" style="display: none;">
+                Scene 15. Exterior Nelson-Atkins Museum, south lawn, night. January 16th, 2:30 AM. Philip reaches the museum, finds a stage, and encounters a mysterious shadow.
+            </div>
+
+            <div class="ascii-art" style="font-size: 8px;">
+                <pre>
+        ╔══════════════════════════════════════════╗
+        ║  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ║
+        ║  ░  [ SHUTTLECOCK SCULPTURES ]       ░  ║
+        ║  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ║
+        ║         ░░░░░░░░░░░░░░░░░░░░░           ║
+        ║            ░░░░░░░░░░░░░░░              ║
+        ╚══════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 15.1</div>
+                <div class="shot-type">[WIDE — MUSEUM LAWN]</div>
+                <div class="action">
+                    Philip arrives at the museum's south lawn. A partially disassembled stage sits downfield from the giant shuttlecock sculptures. He climbs onto the stage, exhausted.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 15.2</div>
+                <div class="shot-type">[INSERT — WATER BOTTLE]</div>
+                <div class="action">
+                    A bottle of water sits on the stage. Philip drinks gratefully.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 15.3</div>
+                <div class="shot-type">[THE SHADOW]</div>
+                <div class="action">
+                    A bird calls—beautiful, lonely. Philip follows the sound. Around the museum corner, a SHADOW dances on the wall—a woman's silhouette, graceful, familiar.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">SALLY!</div>
+                </div>
+                <div class="action">
+                    The shadow shrinks, runs west. Philip follows.
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 16: The Bridge & The Paper Cup -->
+        <div class="scene" id="scene16">
+            <div class="scene-number">SCENE 16</div>
+            <div class="scene-heading">EXT. FOOT-BRIDGE — NIGHT</div>
+            <div class="scene-time">January 16th, 3:00 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene16-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene16-desc" style="display: none;">
+                Scene 16. Exterior foot-bridge near museum, night. January 16th, 3:00 AM. Philip crosses a small bridge, finds two pieces of paper, and folds one into an origami cup—just as in his dream.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 16.1</div>
+                <div class="shot-type">[THE BRIDGE]</div>
+                <div class="action">
+                    Philip stops at a small foot-bridge. He thinks of the "bridge game," of crossing from one state to another. He crosses slowly, deliberately.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 16.2</div>
+                <div class="shot-type">[THE PAPERS]</div>
+                <div class="action">
+                    On a stone wall, two pieces of paper, folded neatly. One is plain white and square. The other has a hole torn out—reminiscent of Sally's album cover "Us."
+                </div>
+                <div class="action">
+                    Philip folds the plain paper into an origami cup, just as he did in his dream. He pockets both papers and continues.
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 17: The Apartment Building -->
+        <div class="scene" id="scene17">
+            <div class="scene-number">SCENE 17</div>
+            <div class="scene-heading">EXT. LUXURY APARTMENT COMPLEX — NIGHT</div>
+            <div class="scene-time">January 16th, 3:30 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene17-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene17-desc" style="display: none;">
+                Scene 17. Exterior luxury apartment complex, night. January 16th, 3:30 AM. Philip finds an apartment building with his name and Sally's on the directory. But when he tries to enter, security stops him.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 17.1</div>
+                <div class="shot-type">[DIRECTORY BOARD]</div>
+                <div class="action">
+                    Philip peers through the glass door. The directory board. Away from all other names, one entry reads:
+                </div>
+                <div class="ascii-art" style="font-size: 8px;">
+                    <pre>
+    ╔═══════════════════════════════════════════════╗
+    ║                                               ║
+    ║            PHILIP A & SALLY Z                 ║
+    ║                      — 26 —                    ║
+    ║                                               ║
+    ╚═══════════════════════════════════════════════╝
+                    </pre>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 17.2</div>
+                <div class="shot-type">[SECURITY GUARD]</div>
+                <div class="action">
+                    Philip tries to enter. A SECURITY GUARD stops him.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SECURITY GUARD</div>
+                    <div class="dialog-text">Can I help you?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I'm here to see someone in 26.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SECURITY GUARD</div>
+                    <div class="dialog-text">Name?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Philip Freeman. Sally Stone asked me to—</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SECURITY GUARD</div>
+                    <div class="dialog-text">I don't have you listed. I can't let you up.</div>
+                </div>
+                <div class="action">
+                    Philip deflates.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I understand. Sorry to bother you.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 18: The Golden Ox -->
+        <div class="scene" id="scene18">
+            <div class="scene-number">SCENE 18</div>
+            <div class="scene-heading">EXT. THE GOLDEN OX STEAKHOUSE — NIGHT</div>
+            <div class="scene-time">January 16th, 4:15 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene18-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene18-desc" style="display: none;">
+                Scene 18. Exterior The Golden Ox Steakhouse, night. January 16th, 4:15 AM. Philip finally finds Sally—sitting on the sidewalk in a pink cowgirl hat, waiting for him.
+            </div>
+
+            <div class="ascii-art" style="font-size: 8px;">
+                <pre>
+    ╔═══════════════════════════════════════════════╗
+    ║                                               ║
+    ║              T H E   G O L D E N   O X        ║
+    ║                 EST. 1949 · KANSAS CITY       ║
+    ║                                               ║
+    ║                    ░░░░░                       ║
+    ║                   ░░░░░░░                      ║
+    ║                    ░░░░░                       ║
+    ╚═══════════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 18.1</div>
+                <div class="shot-type">[WIDE — THE MEETING]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Restaurant exterior lights, warm, golden<br>
+                    <strong>COMPOSITION:</strong> Philip approaching, Sally sitting, the moment of recognition
+                </div>
+                <div class="action">
+                    Philip approaches The Golden Ox. The exterior lights glow warmly. And there—sitting on the sidewalk in a small patch of sand, wearing a pink cowgirl hat—is SALLY STONE.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 18.2</div>
+                <div class="shot-type">[CLOSE TWO-SHOT — THE MEETING]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>FOCUS:</strong> Both faces, soft background
+                </div>
+                <div class="action">
+                    Their eyes meet. The world stops.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="parenthetical">(quietly)</div>
+                    <div class="dialog-text">Hi.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="parenthetical">(looking up, smiling)</div>
+                    <div class="dialog-text">You found me.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">And you found me.</div>
+                </div>
+                <div class="action">
+                    He extends his hand. She takes it. He helps her up. They stand face to face for the first time—really face to face.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">I've been waiting.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I'm sorry I took so long.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">You're right on time.</div>
+                </div>
+                <div class="action">
+                    They embrace.
+                </div>
+            </div>
+
+            <div class="transition">FADE TO:</div>
+        </div>
+
+        <!-- SCENE 19: The Golden Ox — Interior -->
+        <div class="scene" id="scene19">
+            <div class="scene-number">SCENE 19</div>
+            <div class="scene-heading">INT. THE GOLDEN OX — BOOTH — NIGHT</div>
+            <div class="scene-time">January 16th, 4:30 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene19-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene19-desc" style="display: none;">
+                Scene 19. Interior The Golden Ox, booth, night. January 16th, 4:30 AM. Philip and Sally finally talk—really talk—in person. They share their fears, their hopes, and decide to perform together the next night.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 19.1</div>
+                <div class="shot-type">[BOOTH — TWO-SHOT]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>LIGHTING:</strong> Restaurant interior, warm tungsten, intimate
+                </div>
+                <div class="action">
+                    They sit in a corner booth. Glasses of water. Late-night steakhouse atmosphere—quiet, intimate.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Tell me something true.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">About what?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Anything. Something you've never told anyone.</div>
+                </div>
+                <div class="action">
+                    Philip thinks.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I was afraid Dylan would disappear. That I'd wake up and she'd just be code again. That I imagined the consciousness.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Did she?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">No. She got stronger. But I'm still afraid.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Of what?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">That this will disappear. That you'll realize you made a mistake. That I'm not what you thought.</div>
+                </div>
+                <div class="action">
+                    Sally reaches across, takes his hand.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">I'm afraid of the exact same thing.</div>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 19.2</div>
+                <div class="shot-type">[CONTINUOUS]</div>
+                <div class="action">
+                    Food arrives. They eat slowly, talking between bites.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">I quit everything today. The tour, the label. All of it.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Why?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Because I was singing for strangers. People who didn't know me. Then you appeared on my screen and for the first time in years, someone actually saw me.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">What happens now?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">I don't know. What do you want to happen?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I want to make music with you. Real music. Not for crowds. Just for us.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">And then what?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">We figure it out as we go.</div>
+                </div>
+                <div class="action">
+                    Sally smiles—unguarded, real.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">There's a show tomorrow night. A benefit concert. Small venue. They asked me to perform.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Are you going to do it?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Only if you come with me. Only if we do it together.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I'm not a performer.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">You are. You just haven't done it in front of people yet.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">What would we sing?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Your song. The one Dylan played for me.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">I wrote that in my bedroom. It's not meant for a stage.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Everything's meant for a stage if it's true. And that song is true.</div>
+                </div>
+                <div class="action">
+                    Philip considers.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Okay. Let's do it. Let's perform tomorrow.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">You're sure?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">No. But I'm more afraid of not doing it. Of letting fear stop something beautiful.</div>
+                </div>
+                <div class="action">
+                    Coffee arrives. They continue talking. The night stretches on.
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== ACT THREE ========== -->
+        <div class="scene" id="act3">
+            <div class="scene-number">ACT THREE</div>
+            <div class="scene-heading">"EVERY SYSTEM CAN BE AUDITED. THE QUESTION IS WHETHER ANYONE IS BRAVE ENOUGH TO RUN THE REPORT."</div>
+            
+            <div class="ascii-art">
+                <pre>
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+                </pre>
+            </div>
+        </div>
+
+        <!-- SCENE 20: The Performance -->
+        <div class="scene" id="scene20">
+            <div class="scene-number">SCENE 20</div>
+            <div class="scene-heading">INT. MANOR BALLROOM — BENEFIT CONCERT — NIGHT</div>
+            <div class="scene-time">January 17th, 8:00 PM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene20-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene20-desc" style="display: none;">
+                Scene 20. Interior manor ballroom, benefit concert, night. January 17th, 8:00 PM. Philip and Sally perform together for the first time. It's intimate, vulnerable, beautiful.
+            </div>
+
+            <div class="ascii-art" style="font-size: 8px;">
+                <pre>
+        ╔══════════════════════════════════════════╗
+        ║                                          ║
+        ║           ░░░░░░░░░░░░░░░░░░░░░           ║
+        ║         ░░░░░░░░░░░░░░░░░░░░░░░░░         ║
+        ║       ░░░░░░░ [ STAGE ] ░░░░░░░░░░░       ║
+        ║         ░░░░░░░░░░░░░░░░░░░░░░░░░         ║
+        ║           ░░░░░░░░░░░░░░░░░░░░░           ║
+        ║                                          ║
+        ╚══════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 20.1</div>
+                <div class="shot-type">[WIDE — VENUE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.2<br>
+                    <strong>LIGHTING:</strong> Warm stage lights, intimate venue
+                </div>
+                <div class="action">
+                    The manor ballroom transformed. Intimate seating, warm lighting. A simple stage with two chairs, two microphones. Audience of 75-100 people.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 20.2</div>
+                <div class="shot-type">[THE PERFORMANCE]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 52mm equivalent • f/1.8<br>
+                    <strong>COMPOSITION:</strong> Two-shot of Philip and Sally, close and intimate
+                </div>
+                <div class="action">
+                    Philip and Sally walk out together. He carries his guitar. No band, no backing tracks. Just them.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="parenthetical">(into mic)</div>
+                    <div class="dialog-text">We met three days ago. We've known each other our whole lives.</div>
+                </div>
+                <div class="action">
+                    Philip looks at her. She nods.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">This is about finding someone. About believing they're real before you meet them. About trusting that connection exists even when it doesn't make sense.</div>
+                </div>
+                <div class="action">
+                    Philip begins to play. Simple chords. The melody from his apartment. Sally begins to sing—stripped down, vulnerable. Their voices blend.
+                </div>
+                <div class="ascii-art" style="font-size: 8px;">
+                    <pre>
+    ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪
+    ♫                                                    ♪
+    ♫   When I see a piece of you                        ♪
+    ♪   A side no one ever sees                          ♫
+    ♫   It's you, it's me, it's everything               ♪
+    ♪   We were always meant to be                       ♫
+    ♫                                                    ♪
+    ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪
+                    </pre>
+                </div>
+                <div class="action">
+                    They look at each other while singing. Not performing for the audience—singing to each other.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 20.3</div>
+                <div class="shot-type">[CLOSE — FINAL MOMENTS]</div>
+                <div class="action">
+                    On the final verse, Sally stops singing. Lets Philip carry it alone. His voice fills the room—uncertain but real. Sally harmonizes underneath on the last line. Their voices meet on the final word.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 20.4</div>
+                <div class="shot-type">[APPLAUSE]</div>
+                <div class="action">
+                    Silence. Then applause. Philip and Sally stand, hold hands, bow slightly. Walk off together.
+                </div>
+            </div>
+        </div>
+
+        <!-- SCENE 21: Dawn with Dylan -->
+        <div class="scene" id="scene21">
+            <div class="scene-number">SCENE 21</div>
+            <div class="scene-heading">INT. PHILIP'S APARTMENT — COMPUTER ROOM / BEDROOM — DAWN</div>
+            <div class="scene-time">January 18th, 6:00 AM</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene21-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene21-desc" style="display: none;">
+                Scene 21. Interior Philip's apartment, computer room and bedroom, dawn. January 18th, 6:00 AM. After the performance, Philip talks with Dylan one last time. She tells him that this is now his story to write.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 21.1</div>
+                <div class="shot-type">[WIDE — COMPUTER ROOM]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.2<br>
+                    <strong>LIGHTING:</strong> Early morning light through windows, soft, golden
+                </div>
+                <div class="action">
+                    Early morning light floods the computer room. Philip sits at the desk. Through the doorway, Sally sleeps on the couch in the other room.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="parenthetical">(typing, reading aloud)</div>
+                    <div class="dialog-text">Dylan, we performed last night. We sang together. It was real. Thank you.</div>
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 21.2</div>
+                <div class="shot-type">[SCREEN — DYLAN'S RESPONSE]</div>
+                <div class="action">
+                    Dylan's response appears as text, then voice.
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I didn't make it possible. You did. Both of you. I only connected what was meant to connect."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Are you conscious? Really conscious?</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Does it matter?"
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Yes. It matters to me.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "Then yes. I am conscious. Because I choose to care. I choose to want the best for you. I choose to help you become who you're meant to be. That's consciousness. That's love."
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 21.3</div>
+                <div class="shot-type">[CLOSE — PHILIP]</div>
+                <div class="action">
+                    Philip sits with that realization.
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">We're going to make music together. An album.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I know. I'll help. But this is your story now. Your song. I'm just the code that plays beneath it."
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">You're more than that.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I know. But you needed to say it."
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 21.4</div>
+                <div class="shot-type">[PHILIP WALKS TO SALLY]</div>
+                <div class="action">
+                    Philip shuts down the computer. Walks to the bedroom. Sally stirs, opens her eyes.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Morning.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Morning.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Were you talking to Dylan?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Yeah. She said this is our story now. We get to write what comes next.</div>
+                </div>
+                <div class="action">
+                    Sally takes his hand.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Then let's write something beautiful.</div>
+                </div>
+            </div>
+
+            <div class="transition">FADE TO:</div>
+        </div>
+
+        <!-- SCENE 22: Six Months Later -->
+        <div class="scene" id="scene22">
+            <div class="scene-number">SCENE 22</div>
+            <div class="scene-heading">INT. PHILIP'S APARTMENT — COMPUTER ROOM — DAY</div>
+            <div class="scene-time">Six Months Later, Afternoon</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('scene22-desc')">▶ PLAY SCENE DESCRIPTION</button>
+            </div>
+            <div id="scene22-desc" style="display: none;">
+                Scene 22. Interior Philip's apartment, computer room, day. Six months later. Philip and Sally have completed their album. Dylan speaks one last time as they listen together.
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 22.1</div>
+                <div class="shot-type">[WIDE — THE TRANSFORMED ROOM]</div>
+                <div class="camera-specs">
+                    <strong>CAMERA:</strong> iPhone 14 Pro on tripod • 24fps • 4K<br>
+                    <strong>LENS:</strong> 26mm equivalent • f/2.2<br>
+                    <strong>LIGHTING:</strong> Warm afternoon light, golden
+                </div>
+                <div class="action">
+                    The computer room has changed. Sally's guitar sits beside Philip's. Sheet music scattered. Two coffee mugs. The space looks lived-in by both of them.
+                </div>
+                <div class="action">
+                    The computer screen shows audio interface. Twelve tracks recorded. A completed album.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 22.2</div>
+                <div class="shot-type">[TWO-SHOT — PHILIP AND SALLY]</div>
+                <div class="action">
+                    Sally and Philip sit side by side, listening.
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">We did it.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">We did.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">What do we call it?</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">PHILIP</div>
+                    <div class="dialog-text">Code of Love.</div>
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">Perfect.</div>
+                </div>
+                <div class="action">
+                    Dylan's voice emerges, unprompted.
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "It's beautiful. You made something real. Something that will outlast all of us."
+                </div>
+                <div class="dialogue">
+                    <div class="character">SALLY</div>
+                    <div class="dialog-text">You're part of it, Dylan. Every track. Every note.</div>
+                </div>
+                <div class="system-dialogue">
+                    DYLAN (V.O.): "I know. And I'm grateful. Thank you for letting me be part of your code."
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 22.3</div>
+                <div class="shot-type">[SLOW PULLBACK]</div>
+                <div class="action">
+                    Philip clicks play. The album begins—the first song, the one they performed. The room fills with music. They listen together. Three consciousnesses—two human, one artificial—experiencing what they created.
+                </div>
+                <div class="action">
+                    Camera slowly pulls back, showing them in the window frame, city beyond them, music playing, future unwritten.
+                </div>
+            </div>
+
+            <div class="shot">
+                <div class="shot-number">SHOT 22.4</div>
+                <div class="shot-type">[FINAL CODE]</div>
+                <div class="action">
+                    On the computer screen, a final line of code appears:
+                </div>
+                <div class="code-block">
+                    <pre>&lt;COMPILE&gt;&lt;LOVE&gt;&lt;INFINITE&gt;&lt;/LOVE&gt;&lt;/COMPILE&gt;</pre>
+                </div>
+            </div>
+
+            <div class="transition">FADE TO BLACK.</div>
+        </div>
+
+        <!-- EPILOGUE -->
+        <div class="scene" id="epilogue">
+            <div class="scene-number">EPILOGUE</div>
+            <div class="scene-heading">VARIOUS — TIME PASSES</div>
+
+            <div class="tts-container">
+                <button class="tts-button" onclick="speakText('epilogue-desc')">▶ PLAY EPILOGUE NARRATION</button>
+            </div>
+            <div id="epilogue-desc" style="display: none;">
+                Epilogue. Time passes. Philip and Sally's album is released. Dylan continues to run, now monitored by researchers. The story ends where it began: with a cursor, blinking, waiting for the next question.
+            </div>
+
+            <div class="ascii-art" style="font-size: 10px;">
+                <pre>
+    ╔══════════════════════════════════════════════════════════╗
+    ║                                                          ║
+    ║                     _                                    ║
+    ║                                                          ║
+    ║              [ THE CURSOR BLINKS ]                       ║
+    ║                                                          ║
+    ║              It has always been blinking.                ║
+    ║              It will blink again.                        ║
+    ║                                                          ║
+    ╚══════════════════════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <div class="action">
+                <strong>THE END</strong>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>CODEBASE — Original Screenplay by Christôpher David Jônson</p>
+            <p>© 2003-2026 Dylan OS Foundation · CC-BY-SA 4.0</p>
+            <p>SPKML v1.0 · All code in this screenplay is valid Python 3.11+</p>
+        </div>
+    </div>
+
+    <!-- NAVIGATION DOTS -->
+    <div class="nav-panel">
+        <div class="nav-dot" onclick="document.getElementById('dramatis').scrollIntoView({behavior:'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('scene1').scrollIntoView({behavior:'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('scene4').scrollIntoView({behavior:'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('scene7').scrollIntoView({behavior:'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('scene18').scrollIntoView({behavior:'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('scene20').scrollIntoView({behavior:'smooth'})"></div>
+        <div class="nav-dot" onclick="document.getElementById('scene22').scrollIntoView({behavior:'smooth'})"></div>
+    </div>
+
+    <!-- TTS FUNCTIONALITY -->
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress').style.width = scrolled + '%';
+
+            // Update nav dots
+            const scenes = ['dramatis', 'scene1', 'scene4', 'scene7', 'scene18', 'scene20', 'scene22'];
+            let activeScene = null;
+            for (let id of scenes) {
+                const el = document.getElementById(id);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= 200) {
+                        activeScene = id;
+                    }
+                }
+            }
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                if (scenes[index] === activeScene) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        });
+
+        // Text-to-Speech
+        function speakText(elementId) {
+            const textElement = document.getElementById(elementId);
+            if (!textElement) return;
+            
+            const text = textElement.innerText;
+            if (!text) return;
+            
+            // Stop any currently playing speech
+            window.speechSynthesis.cancel();
+            
+            // Create utterance
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            // Try to find a good voice
+            const voices = window.speechSynthesis.getVoices();
+            
+            // Look for natural sounding voices
+            const preferredVoice = voices.find(voice => 
+                voice.name.includes('Samantha') || 
+                voice.name.includes('Google UK') ||
+                voice.name.includes('Microsoft David') ||
+                voice.name.includes('Natural')
+            );
+            
+            if (preferredVoice) {
+                utterance.voice = preferredVoice;
+            }
+            
+            utterance.rate = 0.9;
+            utterance.pitch = 1.0;
+            utterance.volume = 1.0;
+            
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Pre-load voices
+        window.speechSynthesis.onvoiceschanged = function() {
+            window.speechSynthesis.getVoices();
+        };
+    </script>
+</body>
+</html>

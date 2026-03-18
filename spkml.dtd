@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    SPKML (Semantic Programming and Knowledge Markup Language) v1.0
+    Document Type Definition (DTD)
+    
+    Public Identifier: -//Dylan OS//DTD SPKML 1.0//EN
+    System Identifier: http://dylan.os/spkml/1.0/spkml.dtd
+    
+    This DTD defines the structure and allowed elements of SPKML documents.
+    
+    License: CC-BY-SA 4.0
+    Maintained by: Dylan OS Foundation
+    Last Updated: February 2026
+-->
+
+<!-- ============================================
+     Root Element
+     ============================================ -->
+
+<!ELEMENT spkml (metadata, (section | subsection | paragraph | list | 
+                           figure | audio | video | animation | 
+                           table | quote | codeblock)*)>
+
+<!ATTLIST spkml
+    xmlns CDATA #FIXED "http://dylan.os/spkml/1.0"
+    xml:lang NMTOKEN #IMPLIED
+    version CDATA #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    role CDATA #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!-- ============================================
+     Metadata Elements
+     ============================================ -->
+
+<!ELEMENT metadata (title?, subtitle?, author?, date?, version?, 
+                    license?, keywords?, description?, language?, 
+                    type?, duration?, width?, height?, 
+                    custom-metadata*)>
+
+<!ELEMENT title (#PCDATA | emphasis | strong | code)*>
+<!ELEMENT subtitle (#PCDATA | emphasis | strong | code)*>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT version (#PCDATA)>
+<!ELEMENT license (#PCDATA)>
+<!ELEMENT keywords (#PCDATA)>
+<!ELEMENT description (#PCDATA | paragraph)*>
+<!ELEMENT language (#PCDATA)>
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT duration (#PCDATA)>
+<!ELEMENT width (#PCDATA)>
+<!ELEMENT height (#PCDATA)>
+<!ELEMENT custom-metadata (#PCDATA)>
+
+<!ATTLIST metadata
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+>
+
+<!-- ============================================
+     Structural Elements
+     ============================================ -->
+
+<!ELEMENT section (heading?, (subsection | paragraph | list | 
+                              figure | audio | video | animation | 
+                              table | quote | codeblock | reference |
+                              concept | example | code-example)*)>
+
+<!ATTLIST section
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    role CDATA #IMPLIED
+    xml:lang NMTOKEN #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!ELEMENT subsection (heading?, (subsection | paragraph | list | 
+                                 figure | audio | video | animation | 
+                                 table | quote | codeblock | reference |
+                                 concept | example | code-example)*)>
+
+<!ATTLIST subsection
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    role CDATA #IMPLIED
+    xml:lang NMTOKEN #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!ELEMENT heading (#PCDATA | emphasis | strong | code)*>
+
+<!ATTLIST heading
+    level (1|2|3|4|5|6) #REQUIRED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    role CDATA #IMPLIED
+    xml:lang NMTOKEN #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!-- ============================================
+     Text Content Elements
+     ============================================ -->
+
+<!ELEMENT paragraph (#PCDATA | emphasis | strong | code | literal | 
+                     footnote | reference | quote)*>
+
+<!ATTLIST paragraph
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    role CDATA #IMPLIED
+    xml:lang NMTOKEN #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!ELEMENT emphasis (#PCDATA | strong | code)*>
+<!ATTLIST emphasis
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    xml:lang NMTOKEN #IMPLIED
+>
+
+<!ELEMENT strong (#PCDATA | emphasis | code)*>
+<!ATTLIST strong
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    xml:lang NMTOKEN #IMPLIED
+>
+
+<!ELEMENT code (#PCDATA)>
+<!ATTLIST code
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    xml:lang NMTOKEN #IMPLIED
+>
+
+<!ELEMENT literal (#PCDATA)>
+<!ATTLIST literal
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    xml:space (preserve|default) #IMPLIED
+>
+
+<!-- ============================================
+     List Elements
+     ============================================ -->
+
+<!ELEMENT list (item+)>
+
+<!ATTLIST list
+    type (ordered|unordered) #REQUIRED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    role CDATA #IMPLIED
+    start CDATA #IMPLIED
+    xml:lang NMTOKEN #IMPLIED
+>
+
+<!ELEMENT item (#PCDATA | paragraph | list | codeblock | 
+                emphasis | strong | code | reference)*>
+
+<!ATTLIST item
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    xml:lang NMTOKEN #IMPLIED
+    value CDATA #IMPLIED
+>
+
+<!-- ============================================
+     Code Elements
+     ============================================ -->
+
+<!ELEMENT codeblock (#PCDATA | syntax | keyword | string | comment)*>
+
+<!ATTLIST codeblock
+    language CDATA #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    linenumbers (true|false) #IMPLIED
+    startline CDATA #IMPLIED
+    title CDATA #IMPLIED
+    xml:space (preserve|default) #FIXED "preserve"
+>
+
+<!ELEMENT syntax (#PCDATA | keyword | string | comment | operator)*>
+<!ATTLIST syntax
+    language CDATA #IMPLIED
+    id ID #IMPLIED
+>
+
+<!ELEMENT keyword (#PCDATA)>
+<!ATTLIST keyword
+    type CDATA #IMPLIED
+>
+
+<!ELEMENT string (#PCDATA)>
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT operator (#PCDATA)>
+
+<!-- ============================================
+     Media Elements
+     ============================================ -->
+
+<!ELEMENT figure (caption?, description?, source*)>
+
+<!ATTLIST figure
+    src CDATA #REQUIRED
+    alt CDATA #REQUIRED
+    type (image|diagram|chart|screenshot|other) #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!ELEMENT audio (description?, transcript?, source*)>
+
+<!ATTLIST audio
+    src CDATA #REQUIRED
+    format (mp3|ogg|wav|flac|aac) #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    duration CDATA #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!ELEMENT video (description?, transcript?, source*)>
+
+<!ATTLIST video
+    src CDATA #REQUIRED
+    format (mp4|webm|ogv|mkv|avi) #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    duration CDATA #IMPLIED
+    width CDATA #IMPLIED
+    height CDATA #IMPLIED
+    title CDATA #IMPLIED
+    poster CDATA #IMPLIED
+>
+
+<!ELEMENT animation (description?, source*)>
+
+<!ATTLIST animation
+    src CDATA #REQUIRED
+    format (svg|webm|gif|apng|webp) #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    loops CDATA #IMPLIED
+    duration CDATA #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!ELEMENT caption (#PCDATA | emphasis | strong | code)*>
+<!ELEMENT description (#PCDATA | paragraph)*>
+<!ELEMENT transcript (#PCDATA | paragraph | section)*>
+<!ELEMENT source EMPTY>
+
+<!ATTLIST source
+    src CDATA #REQUIRED
+    type CDATA #IMPLIED
+>
+
+<!-- ============================================
+     Table Elements
+     ============================================ -->
+
+<!ELEMENT table (header?, row+)>
+
+<!ATTLIST table
+    columns CDATA #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    bordered (true|false) #IMPLIED
+    striped (true|false) #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!ELEMENT header (cell+)>
+<!ATTLIST header
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+>
+
+<!ELEMENT row (cell+)>
+
+<!ATTLIST row
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    rowspan CDATA #IMPLIED
+>
+
+<!ELEMENT cell (#PCDATA | paragraph | list | emphasis | strong | code | 
+                figure | audio | video)*>
+
+<!ATTLIST cell
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    colspan CDATA #IMPLIED
+    rowspan CDATA #IMPLIED
+    align (left|center|right|justify) #IMPLIED
+>
+
+<!-- ============================================
+     Citation & Reference Elements
+     ============================================ -->
+
+<!ELEMENT quote (paragraph+)>
+
+<!ATTLIST quote
+    source CDATA #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    xml:lang NMTOKEN #IMPLIED
+>
+
+<!ELEMENT reference (#PCDATA)>
+
+<!ATTLIST reference
+    type (book|journal|website|paper|conference|thesis|report|other) #IMPLIED
+    url CDATA #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    doi CDATA #IMPLIED
+    isbn CDATA #IMPLIED
+>
+
+<!ELEMENT footnote (#PCDATA | paragraph | emphasis | strong | code)*>
+
+<!ATTLIST footnote
+    id ID #REQUIRED
+    number CDATA #IMPLIED
+>
+
+<!-- ============================================
+     Semantic Content Elements
+     ============================================ -->
+
+<!ELEMENT concept (term?, definition?, explanation?, example*, 
+                   counter-example*, reference*, equation?)>
+
+<!ATTLIST concept
+    type (principle|theorem|definition|law|hypothesis|theory|postulate) #IMPLIED
+    domain CDATA #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    difficulty (basic|intermediate|advanced) #IMPLIED
+>
+
+<!ELEMENT term (#PCDATA | emphasis | strong)*>
+<!ELEMENT definition (#PCDATA | paragraph | emphasis | strong | code)*>
+<!ELEMENT explanation (#PCDATA | paragraph)*>
+<!ELEMENT example (paragraph | codeblock | figure)*>
+<!ELEMENT counter-example (paragraph | codeblock | figure)*>
+<!ELEMENT equation (#PCDATA)>
+
+<!ATTLIST equation
+    format CDATA #IMPLIED
+    formal (true|false) #IMPLIED
+>
+
+<!ELEMENT code-example (description?, codeblock, explanation?)>
+
+<!ATTLIST code-example
+    language CDATA #IMPLIED
+    id ID #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!ELEMENT timeline (event+)>
+<!ATTLIST timeline
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+>
+
+<!ELEMENT event (title?, description?, metadata?)>
+
+<!ATTLIST event
+    timestamp CDATA #IMPLIED
+    phase CDATA #IMPLIED
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+>
+
+<!-- ============================================
+     Mixed/Generic Elements
+     ============================================ -->
+
+<!ELEMENT generic-section ANY>
+<!ATTLIST generic-section
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    role CDATA #IMPLIED
+    type CDATA #IMPLIED
+>
+
+<!-- ============================================
+     Attribute Declarations
+     ============================================ -->
+
+<!-- Common attributes for accessibility and styling -->
+<!ATTLIST section
+    aria-label CDATA #IMPLIED
+    aria-describedby CDATA #IMPLIED
+>
+
+<!ATTLIST paragraph
+    aria-label CDATA #IMPLIED
+    aria-describedby CDATA #IMPLIED
+>
+
+<!-- Language support -->
+<!ATTLIST *
+    xml:lang NMTOKEN #IMPLIED
+>
+
+<!-- General attributes -->
+<!ATTLIST * 
+    id ID #IMPLIED
+    class CDATA #IMPLIED
+    title CDATA #IMPLIED
+>
+
+<!-- ============================================
+     Entity Declarations
+     ============================================ -->
+
+<!ENTITY nbsp "&#160;">
+<!ENTITY copy "&#169;">
+<!ENTITY reg "&#174;">
+<!ENTITY trade "&#8482;">
+<!ENTITY euro "&#8364;">
+<!ENTITY pound "&#163;">
+<!ENTITY yen "&#165;">
+
+<!-- ============================================
+     Notation Declarations
+     ============================================ -->
+
+<!NOTATION jpeg SYSTEM "image/jpeg">
+<!NOTATION png SYSTEM "image/png">
+<!NOTATION svg SYSTEM "image/svg+xml">
+<!NOTATION gif SYSTEM "image/gif">
+<!NOTATION webp SYSTEM "image/webp">
+
+<!NOTATION mp3 SYSTEM "audio/mpeg">
+<!NOTATION ogg SYSTEM "audio/ogg">
+<!NOTATION wav SYSTEM "audio/wav">
+
+<!NOTATION mp4 SYSTEM "video/mp4">
+<!NOTATION webm SYSTEM "video/webm">
+<!NOTATION ogv SYSTEM "video/ogg">
+
+<!-- ============================================
+     End of DTD
+     ============================================ -->

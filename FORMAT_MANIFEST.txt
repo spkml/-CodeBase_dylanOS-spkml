@@ -1,0 +1,162 @@
+================================================================================
+DYLAN OS DOCUMENTS - FORMAT MANIFEST
+================================================================================
+
+Two comprehensive documents, each available in 4 formats:
+
+================================================================================
+DOCUMENT 1: Dylan OS Manifesto (Revised)
+================================================================================
+
+File: dylan-os-manifesto-revised.md
+Size: 34K
+Format: Markdown (.md)
+Description: Standard markdown format with full formatting support
+Use case: GitHub, documentation sites, text editors
+
+File: dylan-os-manifesto-revised.txt
+Size: 34K
+Format: Plain Text (.txt)
+Description: Monospaced plain text, fully readable without any special tools
+Use case: Terminal, basic text editors, archival, universal compatibility
+
+File: dylan-os-manifesto-revised.html
+Size: 40K
+Format: HTML with embedded CSS (.html)
+Description: Single-file HTML with monospaced styling for reading in browsers
+Use case: Web browsers, email attachments, cross-platform viewing
+
+File: dylan-os-manifesto-revised.spkml
+Size: 21K
+Format: SPKML - Semantic Programming and Knowledge Markup Language (.spkml)
+Description: Semantic XML markup with structured document elements
+Use case: Semantic processing, machine parsing, knowledge extraction
+
+================================================================================
+DOCUMENT 2: Dylan OS 10-Year Development Roadmap
+================================================================================
+
+File: dylan-os-10-year-roadmap.md
+Size: 46K
+Format: Markdown (.md)
+Description: Standard markdown format with full formatting support
+Use case: GitHub, documentation sites, text editors
+
+File: dylan-os-10-year-roadmap.txt
+Size: 46K
+Format: Plain Text (.txt)
+Description: Monospaced plain text, fully readable without any special tools
+Use case: Terminal, basic text editors, archival, universal compatibility
+
+File: dylan-os-10-year-roadmap.html
+Size: 57K
+Format: HTML with embedded CSS (.html)
+Description: Single-file HTML with monospaced styling for reading in browsers
+Use case: Web browsers, email attachments, cross-platform viewing
+
+File: dylan-os-10-year-roadmap.spkml
+Size: 36K
+Format: SPKML - Semantic Programming and Knowledge Markup Language (.spkml)
+Description: Semantic XML markup with structured document elements
+Use case: Semantic processing, machine parsing, knowledge extraction
+
+================================================================================
+FORMAT DESCRIPTIONS
+================================================================================
+
+MARKDOWN (.md)
+  - Human-readable source format
+  - Preserves formatting and structure
+  - Renders on GitHub, GitLab, many platforms
+  - Editable in any text editor
+  - Supports bold, italic, headers, links, code blocks
+  - Best for: Content management, documentation sites
+
+PLAIN TEXT (.txt)
+  - Universal compatibility - works everywhere
+  - Monospaced font for readability
+  - No special formatting characters
+  - Completely archival-safe (will work in 50+ years)
+  - Works in any text editor or terminal
+  - Best for: Long-term archival, cross-platform use
+
+HTML (.html)
+  - Single self-contained file
+  - Renders perfectly in any web browser
+  - Includes embedded CSS styling
+  - Monospaced font for easy reading
+  - No external dependencies
+  - Best for: Web viewing, email sharing, portability
+
+SPKML (.spkml)
+  - Semantic XML format
+  - Structured document hierarchy
+  - Machine-readable and parseable
+  - Preserves logical document structure
+  - Based on SPKML concept from CodeBase
+  - Best for: Semantic processing, automated parsing, knowledge extraction
+
+================================================================================
+READING RECOMMENDATIONS
+================================================================================
+
+For quick reading:
+  → Use .html files in a web browser
+
+For archival/long-term storage:
+  → Use .txt files (universal compatibility forever)
+
+For git/version control repositories:
+  → Use .md files (renders automatically on GitHub/GitLab)
+
+For semantic processing/automation:
+  → Use .spkml files (structured data)
+
+For editing/modifying:
+  → Use .md or .txt files (plaintext, easy to edit)
+
+================================================================================
+DOCUMENT CONTENTS SUMMARY
+================================================================================
+
+MANIFESTO (dylan-os-manifesto-revised.*)
+- Philosophical foundation based on CodeBase novel
+- Six core pillars of Dylan OS design philosophy
+- Future vision including IPFS, blockchain, abundance economics
+- Grounded in FOSS principles and W3C standards
+- ~34-40K across formats
+
+ROADMAP (dylan-os-10-year-roadmap.*)
+- Detailed 10-year development plan
+- Specific milestones for years 1, 3, 5, 7, and 10
+- Year 1: Foundation & proof of concept
+- Year 3: Ecosystem expansion
+- Year 5: Depth & sophistication  
+- Year 7: Specialization & autonomy
+- Year 10: Maturity & scale (8 billion unique AIs)
+- Implementation strategy, metrics, failure modes
+- ~46-57K across formats
+
+================================================================================
+TOTAL FILE SIZE: ~314K across all 8 files
+
+All files are stored in: /mnt/user-data/outputs/
+
+================================================================================
+USAGE NOTES
+================================================================================
+
+These documents are:
+  ✓ Open source (CC-BY-SA 4.0)
+  ✓ Free to share, modify, and redistribute
+  ✓ Suitable for presentation or publication
+  ✓ Complete and self-contained
+  ✓ Available in multiple formats for maximum compatibility
+
+Character encoding: UTF-8 (all files)
+Line endings: Unix/Linux (LF)
+
+================================================================================
+CREATED: February 17, 2026
+VERSION: 1.0 (Manifesto), 1.0 (Roadmap)
+================================================================================

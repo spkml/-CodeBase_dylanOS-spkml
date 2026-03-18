@@ -1,0 +1,414 @@
+================================================================================
+SPKML (Semantic Programming and Knowledge Markup Language) v1.0
+Complete File Index and Documentation
+================================================================================
+
+Official Namespace: http://dylan.os/spkml/1.0
+Public DTD: http://dylan.os/spkml/1.0/spkml.dtd
+Public XSD: http://dylan.os/spkml/1.0/spkml.xsd
+
+Release Date: February 2026
+Maintained By: Dylan OS Foundation
+License: CC-BY-SA 4.0
+
+================================================================================
+CORE SPECIFICATION FILES
+================================================================================
+
+FILE: SPKML_Specification_1.0.md
+TYPE: Documentation (Markdown)
+SIZE: ~80 KB
+PURPOSE: Complete SPKML specification and reference manual
+CONTENTS:
+  - Executive summary and design philosophy
+  - Technical foundation (XML standards, namespaces, encoding)
+  - Core syntax and grammar rules
+  - Complete element reference with 50+ elements:
+    * Metadata elements
+    * Structural elements (sections, headings)
+    * Text elements (paragraphs, emphasis, strong, code)
+    * List elements (ordered, unordered)
+    * Code elements (codeblock, syntax highlighting)
+    * Media elements (figure, audio, video, animation)
+    * Table elements
+    * Citation elements (quote, reference, footnote)
+    * Semantic elements (concept, definition, example)
+  - Detailed explanation of attributes for each element
+  - 7 complete document type examples:
+    * Text documents
+    * Rich text documents
+    * Audio documents
+    * Video documents
+    * Timeline-based presentations
+    * Multimedia animation documents
+    * Vector/raster graphics documents
+  - Language support (100+ languages with ISO 639-1 codes)
+  - Comprehensive code examples
+  - Best practices guide
+  - Migration guide from HTML and Markdown
+USE: Reference guide for developers and content creators
+READING ORDER: Start here for comprehensive understanding
+
+FILE: spkml.dtd
+TYPE: Document Type Definition (XML)
+SIZE: ~6 KB
+FORMAT: Valid XML DTD
+PURPOSE: Validates SPKML documents using traditional DTD mechanism
+DECLARATION: <!DOCTYPE spkml PUBLIC "-//Dylan OS//DTD SPKML 1.0//EN" 
+                                    "http://dylan.os/spkml/1.0/spkml.dtd">
+VALIDATION TOOLS:
+  - xmllint --dtdvalid spkml.dtd document.spkml
+  - Any XML parser supporting DTD
+BEST FOR: Legacy systems, traditional XML validation
+CONTENTS:
+  - Element declarations and nesting rules
+  - Attribute declarations and defaults
+  - Entity definitions
+  - Notation declarations for media types
+SUPPORTED ELEMENTS: All 50+ SPKML elements
+
+FILE: spkml.xsd
+TYPE: XML Schema Definition (W3C XSD)
+SIZE: ~25 KB
+FORMAT: W3C XML Schema v1.0
+PURPOSE: Modern, detailed validation of SPKML documents
+VALIDATION TOOLS:
+  - xmllint --schema spkml.xsd document.spkml
+  - VS Code with XML extension
+  - Oxygen XML Editor
+  - Online validators
+SCHEMA LOCATION: xsi:schemaLocation="http://dylan.os/spkml/1.0
+                                      http://dylan.os/spkml/1.0/spkml.xsd"
+BEST FOR: New documents, IDE integration, strict validation
+ADVANCED FEATURES:
+  - Complex type definitions for all elements
+  - Attribute groups for common attributes
+  - Type restrictions and patterns:
+    * Language codes (ISO 639-1 validation)
+    * URI format validation
+    * Heading level restrictions (1-6)
+    * Media format enumerations
+    * Reference type validation
+  - Cardinality and occurrence rules
+  - Namespace support
+
+================================================================================
+TRANSFORMATION FILES
+================================================================================
+
+FILE: spkml-to-html.xslt
+TYPE: XSLT Stylesheet (XSL Transformations v1.0)
+SIZE: ~15 KB
+FORMAT: Valid XML XSLT v1.0
+PURPOSE: Transform SPKML documents to valid HTML5
+REQUIREMENTS:
+  - libxslt (xsltproc command-line tool)
+  - Installation: sudo apt-get install xsltproc (Linux)
+                  brew install libxslt (macOS)
+USAGE:
+  xsltproc spkml-to-html.xslt input.spkml > output.html
+  xsltproc --stringparam stylesheet spkml-default.css \
+           spkml-to-html.xslt input.spkml > output.html
+
+OUTPUT FEATURES:
+  - Valid HTML5 semantic markup
+  - Responsive layout (mobile-first)
+  - Accessibility features (alt text, semantic elements)
+  - Professional styling with included CSS
+  - Auto-generated table of contents (optional)
+  - Auto-numbered figures and tables
+  - Proper heading hierarchy preservation
+  - Media embedding (audio, video)
+
+TRANSFORMATIONS INCLUDED:
+  - All structural elements → HTML sections
+  - Headings → <h1> through <h6>
+  - Paragraphs → <p> with inline formatting
+  - Lists → <ul> and <ol>
+  - Code blocks → <pre><code>
+  - Figures → <figure><img><figcaption>
+  - Media → <audio>, <video> with controls
+  - Tables → <table><thead><tr><td>
+  - Quotes → <blockquote>
+  - References → <a> with metadata
+  - Concepts → Styled <section> with semantic classes
+
+FILE: spkml-default.css
+TYPE: Cascading Style Sheets (CSS3)
+SIZE: ~11 KB
+FORMAT: Valid CSS3 with Media Queries
+PURPOSE: Professional, accessible styling for SPKML HTML output
+FEATURES:
+  - Responsive design for mobile, tablet, desktop
+  - Dark mode support via prefers-color-scheme
+  - Print-friendly styles
+  - Accessibility features:
+    * High contrast mode support
+    * Reduced motion support
+    * Focus visible for keyboard navigation
+    * Proper link styling for understandability
+  - Professional typography
+  - Color scheme variables (customizable)
+  - Syntax highlighting for code blocks
+
+RESPONSIVE BREAKPOINTS:
+  - Desktop: max-width 900px centered
+  - Tablet: adjustments for max-width 768px
+  - Mobile: optimizations for max-width 480px
+  - Print: optimized for paper output
+
+CUSTOMIZATION:
+  All colors/fonts defined as CSS variables at :root:
+  - --primary-color: #333333
+  - --secondary-color: #666666
+  - --accent-color: #0066cc
+  - --font-family-sans: System fonts
+  - --font-family-mono: Courier New
+
+USAGE:
+  1. Include in HTML: <link rel="stylesheet" href="spkml-default.css">
+  2. Or customize and copy styles inline
+  3. Or extend with additional stylesheets
+
+================================================================================
+DOCUMENTATION & TEMPLATE FILES
+================================================================================
+
+FILE: SPKML_Template_Examples.md
+TYPE: Template Documentation (Markdown)
+SIZE: ~20 KB
+PURPOSE: Ready-to-use templates for common document types
+TEMPLATES INCLUDED:
+  1. Blog Post / Article
+     - Introduction, main content, conclusion structure
+     - Best for: Blog posts, news articles, essays
+  
+  2. Technical Documentation / Tutorial
+     - Requirements, installation steps, verification, troubleshooting
+     - Best for: Software docs, how-to guides, manuals
+  
+  3. Academic Paper / Research Article
+     - Abstract, introduction, literature review, methodology, results,
+       discussion, conclusion, references
+     - Best for: Research papers, academic articles, theses
+  
+  4. Multimedia Presentation / Slide Deck
+     - Multiple slide sections with titles and content
+     - Best for: Presentations, lecture slides, webinars
+  
+  5. Podcast / Audio Content
+     - Audio player, transcript, show notes
+     - Best for: Podcast episodes, audio content
+  
+  6. Video Tutorial / Course Content
+     - Video player, lesson outline, learning resources
+     - Best for: Video tutorials, online courses, training
+  
+  7. Book / Long-Form Document
+     - Copyright, table of contents, preface, chapters, conclusion,
+       bibliography
+     - Best for: Books, long reports, comprehensive guides
+
+USAGE:
+  1. Copy the desired template to new file: cp SPKML_Template_Examples.md myfile.spkml
+  2. Replace placeholder text with your content
+  3. Preserve SPKML structure and element names
+  4. Validate: xmllint --schema spkml.xsd myfile.spkml
+  5. Transform: xsltproc spkml-to-html.xslt myfile.spkml > output.html
+
+FILE: SPKML_README.md
+TYPE: Getting Started Guide & Ecosystem Documentation
+SIZE: ~35 KB
+PURPOSE: Overview, quick start, workflows, best practices
+CONTENTS:
+  - Quick start (5-minute setup)
+  - What is SPKML overview
+  - File descriptions (this content)
+  - Element quick reference
+  - Document type support matrix
+  - Language support (100+ languages)
+  - Workflow examples:
+    * Blog post creation workflow
+    * Academic paper writing workflow
+    * Documentation generation workflow
+  - Validation tools (xmllint, VS Code, Oxygen, online)
+  - Transformation pipeline examples
+  - Best practices guide
+  - Troubleshooting section
+  - Resource links
+  - License information
+
+================================================================================
+SUPPORTING DOCUMENTATION FILES
+================================================================================
+
+FILE: SPKML_FILE_INDEX.txt (This File)
+TYPE: Index and Reference (Plain Text)
+SIZE: ~10 KB
+PURPOSE: Complete index of all SPKML files with descriptions
+CONTENTS:
+  - File listings organized by category
+  - Detailed purpose and usage for each file
+  - File relationships and dependencies
+  - Size and format information
+  - Key features and capabilities
+
+FILE: FORMAT_MANIFEST.txt
+TYPE: Format Documentation (Plain Text)
+PURPOSE: Summary of available file formats and their uses
+CONTENTS:
+  - Overview of Dylan OS and roadmap documents
+  - Format descriptions:
+    * Plain text (.txt) - universal compatibility
+    * Markdown (.md) - for GitHub and documentation sites
+    * HTML (.html) - self-contained web pages
+    * SPKML (.spkml) - semantic markup
+  - Reading recommendations for different use cases
+  - Total file size summary
+
+================================================================================
+FILE ORGANIZATION & RELATIONSHIPS
+================================================================================
+
+VALIDATION CHAIN:
+  Your Document (.spkml)
+         ↓
+  spkml.xsd or spkml.dtd (validation)
+         ↓
+  Result: Valid SPKML Document
+
+TRANSFORMATION CHAIN:
+  Your Document (.spkml)
+         ↓
+  spkml-to-html.xslt
+         ↓
+  Output (.html)
+         ↓
+  spkml-default.css (styling)
+         ↓
+  Result: Professional HTML5 Document
+
+DOCUMENTATION FLOW:
+  Start → SPKML_README.md (overview)
+         ↓
+  SPKML_Specification_1.0.md (reference)
+         ↓
+  SPKML_Template_Examples.md (templates)
+         ↓
+  Create document with xsd/dtd validation
+
+================================================================================
+QUICK REFERENCE: WHICH FILE TO USE WHEN
+================================================================================
+
+IF YOU WANT TO...
+
+1. GET STARTED QUICKLY
+   → Read: SPKML_README.md (Quick Start section)
+   → Use: SPKML_Template_Examples.md (pick appropriate template)
+   → Validate: spkml.xsd
+
+2. UNDERSTAND SPKML COMPLETELY
+   → Read: SPKML_Specification_1.0.md (start to finish)
+   → Reference: spkml.xsd (for detailed element rules)
+   → Copy: SPKML_Template_Examples.md (for real examples)
+
+3. CREATE A NEW DOCUMENT
+   → Copy: Appropriate template from SPKML_Template_Examples.md
+   → Edit: Your content
+   → Validate: xmllint --schema spkml.xsd your-document.spkml
+   → Transform: xsltproc spkml-to-html.xslt your-document.spkml > output.html
+
+4. VALIDATE YOUR DOCUMENT
+   → Use: spkml.xsd (modern, recommended)
+   → Or: spkml.dtd (legacy)
+   → Tool: xmllint, VS Code, Oxygen XML Editor
+
+5. TRANSFORM TO HTML
+   → Use: spkml-to-html.xslt
+   → Then: Apply spkml-default.css to output
+   → Tool: xsltproc (command line)
+
+6. STYLE YOUR HTML OUTPUT
+   → Use: spkml-default.css
+   → Or: Customize CSS variables in spkml-default.css
+   → Or: Write additional CSS to override defaults
+
+7. PUBLISH TO DIFFERENT FORMATS
+   → HTML: Use spkml-to-html.xslt + spkml-default.css
+   → PDF: Transform to HTML, then use wkhtmltopdf or Prince
+   → EPUB: Transform to HTML, package as EPUB container
+   → Plain Text: Write custom XSLT transformer
+   → Markdown: Write custom XSLT transformer
+
+================================================================================
+NAMESPACE & PUBLIC IDENTIFIERS
+================================================================================
+
+Official SPKML Namespace:
+  http://dylan.os/spkml/1.0
+
+Public DTD:
+  PUBLIC "-//Dylan OS//DTD SPKML 1.0//EN"
+  SYSTEM "http://dylan.os/spkml/1.0/spkml.dtd"
+
+Public XSD Location:
+  http://dylan.os/spkml/1.0/spkml.xsd
+
+Public XSLT Location:
+  http://dylan.os/spkml/1.0/spkml-to-html.xslt
+
+Public CSS Location:
+  http://dylan.os/spkml/1.0/spkml-default.css
+
+================================================================================
+GETTING HELP & RESOURCES
+================================================================================
+
+Official Website: http://dylan.os/spkml/
+GitHub Repository: https://github.com/dylan-os/spkml
+Issue Tracker: https://github.com/dylan-os/spkml/issues
+Community Forum: https://forum.dylan.os/spkml/
+Email Support: spkml-support@dylan.os
+
+Documentation:
+  - Full Specification: SPKML_Specification_1.0.md
+  - Getting Started: SPKML_README.md
+  - Examples: SPKML_Template_Examples.md
+
+Tools & Validators:
+  - xmllint (command line, included in libxml2)
+  - VS Code XML Extension
+  - Oxygen XML Editor (commercial)
+  - Online: https://www.w3.org/2012/06/xsd-validator/
+
+================================================================================
+SUMMARY
+================================================================================
+
+SPKML provides a complete ecosystem for semantic document creation:
+
+1. DEFINE: SPKML_Specification_1.0.md defines the language
+2. VALIDATE: spkml.xsd and spkml.dtd ensure correctness  
+3. CREATE: SPKML_Template_Examples.md provides starting points
+4. TRANSFORM: spkml-to-html.xslt converts to HTML
+5. STYLE: spkml-default.css provides professional appearance
+6. DEPLOY: Output HTML to web, convert to PDF, etc.
+
+All files work together to provide a complete solution for semantic,
+format-agnostic document creation and publishing.
+
+================================================================================
+VERSION INFORMATION
+================================================================================
+
+SPKML Version: 1.0.0
+Release Date: February 2026
+Status: Production Ready
+Maintained By: Dylan OS Foundation
+License: CC-BY-SA 4.0 (Creative Commons Attribution-ShareAlike 4.0)
+
+For updates and new versions, visit:
+  http://dylan.os/spkml/
+
+================================================================================

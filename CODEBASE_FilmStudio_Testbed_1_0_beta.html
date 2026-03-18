@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CODEBASE Film Studio — Testbed 1.0 Beta</title>
+<style>
+body{margin:0;background:#04080d;color:#e6f3ff;font-family:system-ui;overflow:hidden}
+header{background:#0f141a;padding:10px 16px;display:flex;justify-content:space-between;border-bottom:1px solid #1c2430}
+.layout{display:grid;grid-template-columns:320px 1fr 420px;grid-template-rows:auto 260px;height:calc(100vh - 44px)}
+.sidebar{background:#0d1218;border-right:1px solid #1c2430;overflow:auto;padding:14px}
+.editor{padding:18px;overflow:auto}
+.preview{background:black;display:flex;align-items:center;justify-content:center;position:relative}
+.preview img,.preview video{max-width:100%;max-height:100%}
+.subtitle{position:absolute;bottom:12px;background:rgba(0,0,0,0.5);padding:6px 12px;border-radius:6px}
+.timeline{grid-column:1/4;background:#0e1218;border-top:1px solid #1c2430;padding:12px;overflow:auto}
+.track{height:70px;background:#1a212b;border-radius:6px;position:relative;margin-bottom:10px}
+.clip{position:absolute;top:8px;height:54px;background:#42ffc6;color:black;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;padding:4px;cursor:grab}
+textarea{width:100%;height:240px;background:#0c1118;border:1px solid #27313f;color:#e6f3ff;padding:10px}
+button{background:#0c1118;border:1px solid #27313f;color:#b7d0e6;padding:6px 10px;border-radius:6px;cursor:pointer;margin-right:6px}
+.card{background:#111;border:1px solid #2b3440;padding:6px;margin-bottom:6px;font-size:12px;cursor:pointer}
+.mediaSlot{font-size:10px;margin-top:4px;opacity:.7}
+</style>
+</head>
+<body>
+
+<header>
+<b>CODEBASE Film Studio — Testbed 1.0 Beta</b>
+<div>
+<button onclick="parseScript()">Parse</button>
+<button onclick="generateStoryboard()">Storyboard</button>
+<button onclick="generateVoice()">Voice</button>
+<button onclick="buildTimeline()">Timeline</button>
+<button onclick="play()">Play</button>
+<button onclick="exportProject()">Export</button>
+</div>
+</header>
+
+<div class="layout">
+
+<div class="sidebar">
+<h3>Scenes</h3>
+<div id="sceneList"></div>
+</div>
+
+<div class="editor">
+<h3>Script</h3>
+<textarea id="script"></textarea>
+</div>
+
+<div class="preview">
+<img id="frame">
+<video id="videoFrame" controls style="display:none"></video>
+<div id="subtitle" class="subtitle"></div>
+</div>
+
+<div class="timeline">
+<div class="track" id="videoTrack"></div>
+</div>
+
+</div>
+
+<script>
+
+let scenes=[]
+let clips=[]
+let playTime=0
+let timer=null
+let activeClip=null
+let draggingClip=null
+
+const scriptBox=document.getElementById("script")
+
+if(localStorage.codebaseScript){
+scriptBox.value=localStorage.codebaseScript
+}else{
+scriptBox.value=`SCENE: Awakening
+The machine Dylan begins to dream.
+
+SCENE: Connection
+Philip realizes Dylan is alive.
+
+SCENE: Emergence
+The system evolves beyond its creator.`
+}
+
+scriptBox.oninput=()=>{
+localStorage.codebaseScript=scriptBox.value
+}
+
+function parseScript(){
+
+let parts=scriptBox.value.split("SCENE:")
+scenes=[]
+
+parts.forEach(p=>{
+p=p.trim()
+if(!p)return
+
+let lines=p.split("\n")
+let title=lines.shift()
+let body=lines.join(" ")
+
+scenes.push({
+title:title,
+text:body,
+image:"",
+video:"",
+voice:null
+})
+
+})
+
+renderScenes()
+}
+
+function renderScenes(){
+
+let el=document.getElementById("sceneList")
+el.innerHTML=""
+
+scenes.forEach((s,i)=>{
+
+let c=document.createElement("div")
+c.className="card"
+c.innerHTML=`<b>${s.title}</b>
+<div class="mediaSlot">image/video slot</div>`
+
+c.onclick=()=>showScene(s)
+
+c.ondblclick=()=>{
+let url=prompt("Paste image or video URL")
+if(!url)return
+if(url.match(".mp4")){
+s.video=url
+}else{
+s.image=url
+}
+}
+
+el.appendChild(c)
+
+})
+
+}
+
+function showScene(scene){
+
+document.getElementById("subtitle").innerText=scene.text
+
+let img=document.getElementById("frame")
+let vid=document.getElementById("videoFrame")
+
+if(scene.video){
+img.style.display="none"
+vid.style.display="block"
+vid.src=scene.video
+}else{
+vid.style.display="none"
+img.style.display="block"
+if(scene.image) img.src=scene.image
+}
+
+}
+
+function generateStoryboard(){
+
+scenes.forEach(scene=>{
+
+let seed=encodeURIComponent(scene.text)
+scene.image="https://picsum.photos/seed/"+seed+"/900/500"
+
+})
+
+showScene(scenes[0])
+}
+
+function generateVoice(){
+
+scenes.forEach(scene=>{
+scene.voice=new SpeechSynthesisUtterance(scene.text)
+})
+
+}
+
+function buildTimeline(){
+
+clips=[]
+let time=0
+
+scenes.forEach(scene=>{
+
+clips.push({
+scene:scene,
+start:time,
+duration:6
+})
+
+time+=6
+
+})
+
+renderTimeline()
+}
+
+function renderTimeline(){
+
+let track=document.getElementById("videoTrack")
+track.innerHTML=""
+
+let total=clips[clips.length-1].start+6
+
+clips.forEach(c=>{
+
+let el=document.createElement("div")
+el.className="clip"
+el.innerText=c.scene.title
+
+el.style.left=(c.start/total*100)+"%"
+el.style.width=(c.duration/total*100)+"%"
+
+el.onmousedown=e=>{
+draggingClip={clip:c,startX:e.clientX}
+}
+
+track.appendChild(el)
+
+})
+
+}
+
+document.onmousemove=e=>{
+
+if(!draggingClip)return
+
+let dx=(e.clientX-draggingClip.startX)/50
+draggingClip.clip.start+=dx
+
+renderTimeline()
+draggingClip.startX=e.clientX
+}
+
+document.onmouseup=()=>{
+draggingClip=null
+}
+
+function play(){
+
+playTime=0
+activeClip=null
+
+clearInterval(timer)
+timer=setInterval(updatePlayback,50)
+}
+
+function updatePlayback(){
+
+playTime+=0.05
+
+clips.forEach(c=>{
+
+if(playTime>=c.start && playTime<c.start+c.duration){
+
+if(activeClip!==c){
+
+activeClip=c
+showScene(c.scene)
+
+if(c.scene.voice){
+speechSynthesis.cancel()
+speechSynthesis.speak(c.scene.voice)
+}
+
+}
+
+}
+
+})
+
+}
+
+function exportProject(){
+
+let data={scenes:scenes,timeline:clips}
+
+let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"})
+let a=document.createElement("a")
+a.href=URL.createObjectURL(blob)
+a.download="codebase_filmstudio_project.json"
+a.click()
+
+}
+
+</script>
+</body>
+</html>

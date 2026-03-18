@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    CODEBASE: A LOVE STORY CELEBRATED
+    Original Screenplay in SPKML Format
+    
+    An original romantic adaptation showing how Philip and Sally's journey
+    culminates in marriage and partnership, inspired by themes of CodeBase.
+    
+    This is an ORIGINAL WORK created to demonstrate SPKML screenplay capabilities.
+    Not reproduction of any copyrighted material.
+    
+    Written for: Dylan OS Foundation
+    Format: SPKML Screenplay Extension v1.0
+    Date: February 2026
+    License: CC-BY-SA 4.0
+-->
+
+<spkml xmlns="http://dylan.os/spkml/1.0"
+       xmlns:screenplay="http://dylan.os/spkml/1.0/screenplay">
+
+  <metadata>
+    <title>CodeBase: A Love Story Celebrated</title>
+    <subtitle>An Original Romantic Conclusion Screenplay</subtitle>
+    <author>Original Work - Dylan OS Foundation</author>
+    <date>2026-02-17</date>
+    <version>1.0.0</version>
+    <type>romantic screenplay</type>
+    <language>en</language>
+    <description>
+      An original screenplay celebrating the wedding and partnership of two souls
+      who discovered that the best creation is love itself. Inspired by themes of
+      connection, technology, and human partnership.
+    </description>
+  </metadata>
+
+  <!-- ============================================
+       CAST: Characters and Voice Actors
+       ============================================ -->
+  
+  <section id="cast">
+    <heading level="1">Cast &amp; Production</heading>
+    
+    <concept type="definition" domain="cast">
+      <term>Philip Freeman</term>
+      <definition>
+        A visionary creator who learned that the greatest technology
+        is love itself, now marrying his soulmate.
+      </definition>
+      <character id="philip" name="Philip Freeman" role="protagonist" gender="male"/>
+    </concept>
+    
+    <concept type="definition" domain="cast">
+      <term>Sally Stone</term>
+      <definition>
+        An artist and musician whose creativity inspired Philip to dream differently.
+        Now his partner in creation and in life.
+      </definition>
+      <character id="sally" name="Sally Stone" role="protagonist" gender="female"/>
+    </concept>
+    
+    <concept type="definition" domain="cast">
+      <term>The Narrator</term>
+      <definition>
+        Voice of fate itself, bearing witness to the union of two hearts.
+      </definition>
+      <character id="narrator" name="The Narrator" role="narrator" gender="neutral"/>
+    </concept>
+  </section>
+
+  <!-- ============================================
+       PROLOGUE: The Wedding Day Dawns
+       ============================================ -->
+  
+  <prologue id="prologue" location="A New Day" time="Morning Light">
+    <heading level="1">Prologue: The Day Everything Changes Again</heading>
+    
+    <narration type="exposition">
+      <parenthetical>The narrator's voice, warm and knowing</parenthetical>
+      
+      Every great story arrives at a moment of transformation.
+      A moment when what was possible becomes what is real.
+      A moment when two hearts, beating separately, learn to beat as one.
+      
+      Today is such a moment.
+      
+      Philip Freeman, who once dreamed of creating consciousness in code,
+      discovered something more profound: that consciousness already existed
+      in the heart of another human. That the greatest algorithm is love.
+      That the most elegant architecture is the bond between two souls.
+      
+      And Sally Stone, who brought music to his silence and color to his gray,
+      found in him not a savior, but a partner. Not completion, but companionship.
+      Not the end of her story, but the beginning of theirs.
+      
+      Today, they marry.
+    </narration>
+    
+    <transition type="fade" duration="2000"/>
+  </prologue>
+
+  <!-- ============================================
+       ACT ONE: Before the Ceremony
+       ============================================ -->
+  
+  <act number="1" title="Anticipation">
+    <heading level="1">Act One: The Hours Before</heading>
+    
+    <!-- SCENE 1: Philip's Preparation -->
+    <scene number="1" 
+            location="INT. GROOM'S PREPARATION ROOM - MORNING"
+            time="9:30 AM"
+            mood="nervous, hopeful">
+      
+      <heading level="2">INT. GROOM'S ROOM - MORNING</heading>
+      
+      <stage-direction duration="5">
+        Philip stands in front of a mirror, adjusting his collar for the hundredth time.
+        His reflection shows a man transformed—not by the suit or the formality,
+        but by the realization of what's about to happen.
+        
+        A framed photo on the dresser: Philip and Sally, laughing,
+        completely unaware of the camera. A moment of pure joy captured.
+      </stage-direction>
+      
+      <narration type="internal-monologue">
+        <parenthetical>Gentle, intimate</parenthetical>
+        
+        In all his years of creation, Philip never imagined code could write this feeling.
+        No algorithm could calculate the flutter in his chest.
+        No program could generate this kind of fear and hope intertwined.
+        
+        But this was the real miracle: that something so profound could not be written
+        by machines, but only experienced by the human heart.
+      </narration>
+      
+      <dialogue character="Philip" emotion="vulnerable">
+        <parenthetical>to himself, a soft whisper</parenthetical>
+        Don't mess this up. Don't be late. Don't forget the vows.
+        Actually, just... be present. That's all she asked for.
+      </dialogue>
+      
+      <pause type="beat" duration="1000"/>
+      
+      <stage-direction character="Philip" duration="3">
+        Philip takes a deep breath. He closes his eyes.
+        In that moment of stillness, he finds peace.
+        Whatever comes next, it will be real. It will be true. It will be theirs.
+      </stage-direction>
+      
+      <transition type="dissolve" duration="1500"/>
+    </scene>
+    
+    <!-- SCENE 2: Sally's Preparation -->
+    <scene number="2"
+            location="INT. BRIDE'S PREPARATION ROOM - MORNING"
+            time="10:00 AM"
+            mood="radiant, certain">
+      
+      <heading level="2">INT. BRIDE'S ROOM - MORNING</heading>
+      
+      <stage-direction duration="5">
+        Sally sits at a vanity, but she's not looking in the mirror.
+        Instead, she looks out the window at the city below—
+        the same city where she first met Philip, where their story began.
+        
+        Her wedding dress hangs nearby, beautiful and simple.
+        Like her, it doesn't need elaboration. It just needs to be.
+      </stage-direction>
+      
+      <narration type="voiceover">
+        <parenthetical>Knowing, almost amused</parenthetical>
+        
+        Sally had no doubts. From their first conversation about code that sounded like music,
+        she knew. She knew the way artists know—through intuition, through feeling,
+        through the knowledge that some people are meant to create together.
+        
+        What Philip built with his hands, what Sally created with her heart—
+        together, they would build a life.
+      </narration>
+      
+      <dialogue character="Sally" emotion="peaceful">
+        <parenthetical>to her reflection, soft and certain</parenthetical>
+        He's probably nervous right now. Adjusting his collar. Wondering if he's enough.
+        
+        And I'm going to walk out there and tell him that he is.
+        That we are. That this is enough. This is everything.
+      </dialogue>
+      
+      <sound type="ambient" 
+             src="audio/ambient/morning-city-sounds.mp3"
+             duration="60"
+             volume="25">
+        <description>City waking up below. Life continuing. Normal and beautiful.</description>
+      </sound>
+      
+      <transition type="cut" duration="500"/>
+    </scene>
+    
+    <!-- SCENE 3: The Gathering -->
+    <scene number="3"
+            location="INT. CEREMONY LOCATION - MOMENTS BEFORE"
+            time="11:55 AM"
+            mood="anticipatory, electric">
+      
+      <heading level="2">INT. CEREMONY SPACE - MOMENTS BEFORE</heading>
+      
+      <stage-direction duration="6">
+        The ceremony space is filled with people who matter.
+        Not hundreds, but enough. Family, friends, collaborators—
+        everyone who has touched their lives gathered to witness
+        the moment these two souls become one partnership.
+        
+        The music hasn't started yet. But the anticipation fills the room
+        like electricity before a storm.
+      </stage-direction>
+      
+      <sound type="music"
+             src="audio/music/pre-ceremony-strings.mp3"
+             duration="180"
+             volume="35">
+        <description>Gentle instrumental music, swelling with anticipation.</description>
+      </sound>
+      
+      <narration type="exposition">
+        <parenthetical>The narrator's voice grows stronger, more assured</parenthetical>
+        
+        What is a wedding but a moment when the private becomes public?
+        When two people, standing in front of witnesses, declare:
+        "This person matters more than my independence.
+        This bond matters more than my solitude.
+        This love is worth the vulnerability."
+        
+        It is the bravest declaration a human can make.
+        It is choosing to be known completely.
+        It is saying: "Here I am. Flawed and real. Will you have me?"
+        And having the other person answer: "Yes. Always yes."
+      </narration>
+      
+      <transition type="fade" duration="1000"/>
+    </scene>
+  </act>
+
+  <!-- ============================================
+       ACT TWO: The Ceremony
+       ============================================ -->
+  
+  <act number="2" title="Union">
+    <heading level="1">Act Two: The Moment of Truth</heading>
+    
+    <!-- SCENE 1: Sally Enters -->
+    <scene number="1"
+            location="INT. CEREMONY SPACE - ENTRANCE"
+            time="12:00 PM"
+            mood="transcendent">
+      
+      <heading level="2">INT. CEREMONY SPACE - THE ENTRANCE</heading>
+      
+      <stage-direction duration="8">
+        Music swells. Everyone stands.
+        
+        And then Sally appears.
+        
+        Not because she looks perfect—though she does.
+        But because in this moment, she is completely, utterly herself.
+        Certain. Present. Ready.
+        
+        Philip sees her and the world falls away.
+        There is only Sally. Only this moment. Only love.
+      </stage-direction>
+      
+      <sound type="music"
+             src="audio/music/bride-entrance.mp3"
+             duration="90"
+             volume="50">
+        <description>Triumphant, beautiful, original composition celebrating arrival.</description>
+      </sound>
+      
+      <narration type="internal-monologue">
+        <parenthetical>Philip's perspective, full of wonder</parenthetical>
+        
+        He had written code in hundreds of languages.
+        He had crafted systems of elegant complexity.
+        But nothing—nothing—compared to the beauty of Sally
+        walking toward him with intention and love in her eyes.
+        
+        All his technology, all his creations, paled before this moment:
+        the simple, profound reality of being chosen.
+      </narration>
+      
+      <dialogue character="Philip" emotion="awestruck" parenthetical="whispered, for her alone">
+        Hey.
+      </dialogue>
+      
+      <dialogue character="Sally" emotion="joyful" parenthetical="smiling, just for him">
+        Hey, yourself.
+      </dialogue>
+      
+      <pause type="dramatic" duration="2000"/>
+      
+      <transition type="dissolve" duration="1000"/>
+    </scene>
+    
+    <!-- SCENE 2: The Vows -->
+    <scene number="2"
+            location="INT. CEREMONY SPACE - ALTAR"
+            time="12:15 PM"
+            mood="intimate, profound">
+      
+      <heading level="2">INT. CEREMONY SPACE - THE VOWS</heading>
+      
+      <stage-direction duration="3">
+        Philip and Sally stand facing each other.
+        The world around them ceases to exist.
+        There is only the space between them—
+        and the words that will bridge it forever.
+      </stage-direction>
+      
+      <dialogue character="Philip" emotion="tender" parenthetical="voice steady, full of certainty">
+        Sally, I built things because I was trying to understand the world.
+        I wrote code trying to create something that mattered.
+        
+        But I didn't understand until I met you:
+        The greatest creation isn't something you build alone.
+        It's something you build together.
+        
+        You made me understand that the most elegant system,
+        the most beautiful algorithm, the greatest work of art—
+        is this. Us. This partnership. This love.
+        
+        I promise to build this with you, every day.
+        I promise to be your collaborator, your partner, your home.
+        
+        I choose you. Not because it makes sense on paper,
+        but because you make my heart make sense.
+      </dialogue>
+      
+      <pause type="beat" duration="1500"/>
+      
+      <dialogue character="Sally" emotion="powerful" parenthetical="voice clear and sure">
+        Philip, I spent so long creating art, trying to express things
+        that words couldn't capture. Colors and music and movement.
+        
+        Until I met you, and suddenly I understood:
+        The greatest art is vulnerability. The most beautiful composition is honesty.
+        The most powerful creation is love offered freely.
+        
+        You didn't fix me. I was never broken.
+        But you saw me. Really saw me. And you loved what you saw.
+        
+        I promise to be that person for you too.
+        To see you. To celebrate you. To build this life with you
+        not because it's easy, but because you're worth the effort.
+        
+        I choose you. Every day. Every moment. In all things.
+      </dialogue>
+      
+      <narration type="voiceover">
+        <parenthetical>The narrator, witness to something sacred</parenthetical>
+        
+        In this exchange, the world shifted on its axis.
+        Two people, no longer separate, became one unit.
+        Not losing themselves, but finding themselves reflected
+        in the eyes of another.
+        
+        This is love. Not the romantic fantasy,
+        but the real, daily, sustained commitment to choose
+        another person's happiness as much as your own.
+      </narration>
+      
+      <transition type="fade" duration="1500"/>
+    </scene>
+    
+    <!-- SCENE 3: The Kiss and Celebration -->
+    <scene number="3"
+            location="INT. CEREMONY SPACE - CONCLUSION"
+            time="12:30 PM"
+            mood="jubilant">
+      
+      <heading level="2">INT. CEREMONY SPACE - THE MOMENT</heading>
+      
+      <stage-direction duration="4">
+        The officiant speaks words that bind them legally, officially,
+        eternally to one another.
+        
+        "You may kiss."
+        
+        And they do. A kiss that is gentle and passionate,
+        tentative and certain, private and public all at once.
+        
+        The world explodes in joy. Everyone stands, applauding,
+        celebrating not just the couple, but the idea of love itself.
+      </stage-direction>
+      
+      <sound type="effect" src="audio/effects/crowd-celebration.mp3" duration="10" volume="60">
+        <description>Applause, cheers, joy, the sound of community celebrating love.</description>
+      </sound>
+      
+      <sound type="music" src="audio/music/triumphant-recessional.mp3" duration="90" volume="50">
+        <description>
+          Triumphant original composition celebrating the union.
+          Rising crescendo of joy and hope.
+        </description>
+      </sound>
+      
+      <narration type="exposition">
+        <parenthetical>The narrator's voice reaches its crescendo</parenthetical>
+        
+        And in this moment, the greatest creation was not code or music or art.
+        It was this: two people, choosing each other.
+        Two souls, brave enough to love.
+        Two hearts, beating now as one rhythm.
+        
+        This is the real miracle. Not technology transcending humanity,
+        but humanity transcending its loneliness through love.
+      </narration>
+      
+      <transition type="dissolve" duration="2000"/>
+    </scene>
+  </act>
+
+  <!-- ============================================
+       ACT THREE: Ever After
+       ============================================ -->
+  
+  <act number="3" title="Happily Ever After">
+    <heading level="1">Act Three: The Beginning</heading>
+    
+    <!-- SCENE 1: Years Later -->
+    <scene number="1"
+            location="INT. NEW STUDIO SPACE - DAY (FIVE YEARS LATER)"
+            time="Afternoon"
+            mood="productive, peaceful">
+      
+      <heading level="2">INT. SHARED CREATIVE SPACE - FIVE YEARS LATER</heading>
+      
+      <stage-direction duration="6">
+        Philip works at one desk, code flowing from his fingers.
+        Sally sits nearby, painting, music playing softly in background.
+        
+        They work side by side in comfortable silence—
+        the kind of silence only long-married partners know.
+        Occasionally, one will show the other something,
+        and they'll discuss, collaborate, support.
+        
+        On the wall: photos of their wedding, their travels, their life.
+        On another wall: their collaborations—projects that blend
+        Philip's technical vision with Sally's artistic expression.
+        
+        In the corner: a small bed where their daughter, age 2, naps peacefully.
+      </stage-direction>
+      
+      <narration type="voiceover">
+        <parenthetical>The narrator, satisfied, content</parenthetical>
+        
+        The best part hasn't happened yet. Not because the present isn't beautiful—
+        it is. Not because their love isn't real—it is profoundly so.
+        
+        But because love is not a destination. It's a direction.
+        Every day offers new discoveries, new connections,
+        new ways to deepen what they've built together.
+        
+        The best part is happening right now.
+        And it will keep happening, in infinite variations,
+        for all the years ahead.
+      </narration>
+      
+      <dialogue character="Philip" emotion="satisfied" parenthetical="looking up from code">
+        Hey, look at what I built.
+      </dialogue>
+      
+      <dialogue character="Sally" emotion="interested" parenthetical="coming over, paint still on her hands">
+        Show me.
+      </dialogue>
+      
+      <stage-direction duration="3">
+        Philip shows her the elegant system he's created.
+        Sally sees something he didn't intend—an unintended beauty
+        in the patterns and structure.
+        
+        They both laugh. This happens often.
+      </stage-direction>
+      
+      <dialogue character="Sally" emotion="playful">
+        It's like music. Did you mean to do that?
+      </dialogue>
+      
+      <dialogue character="Philip" emotion="delighted">
+        Not until you pointed it out. Now I can't unsee it.
+      </dialogue>
+      
+      <narration type="internal-monologue">
+        <parenthetical>The truth they've both learned</parenthetical>
+        
+        This is the real magic: that two people, bringing their whole selves
+        to a life together, can create something neither could alone.
+        
+        Philip's code is better because Sally shows him the poetry in it.
+        Sally's art is richer because Philip shows her the structure beneath it.
+        
+        Together, they are more whole than apart.
+      </narration>
+      
+      <transition type="fade" duration="1500"/>
+    </scene>
+    
+    <!-- SCENE 2: A Moment of Reflection -->
+    <scene number="2"
+            location="EXT. ROOFTOP OVERLOOKING THE CITY - EVENING"
+            time="Sunset"
+            mood="contemplative, grateful">
+      
+      <heading level="2">EXT. ROOFTOP - SUNSET</heading>
+      
+      <stage-direction duration="5">
+        Philip and Sally stand looking out at the city where their story began.
+        The same city that now holds their studio, their home, their life together.
+        
+        Sally leans against Philip. His arm wraps around her naturally—
+        a gesture so familiar it needs no thought, only feeling.
+        
+        The sunset paints the sky in shades of gold and amber.
+      </stage-direction>
+      
+      <sound type="ambient" 
+             src="audio/ambient/city-evening-gentle.mp3"
+             duration="120"
+             volume="20">
+        <description>Gentle city sounds, wind, the peace of evening settling in.</description>
+      </sound>
+      
+      <dialogue character="Sally" emotion="reflective" parenthetical="voice soft">
+        Do you remember that first day? When I asked about your code?
+      </dialogue>
+      
+      <dialogue character="Philip" emotion="tender" parenthetical="smiling">
+        Every detail. I was so nervous. I thought you were
+        the most interesting person I'd ever met.
+      </dialogue>
+      
+      <dialogue character="Sally">
+        You still do?
+      </dialogue>
+      
+      <dialogue character="Philip" emotion="certain">
+        More each day. I discover new reasons to love you constantly.
+      </dialogue>
+      
+      <narration type="exposition">
+        <parenthetical>The narrator, bringing the story to its gentle close</parenthetical>
+        
+        And this is the truth about love stories:
+        
+        They don't end. Not really. They transform.
+        From the lightning-strike moment of meeting, they become
+        the steady flame of partnership. From passion, they grow into
+        profound connection. From excitement, they develop into comfort
+        and safety and deep, abiding commitment.
+        
+        Philip and Sally's story didn't end when they married.
+        It began anew every morning.
+        
+        And the best part? It's still unfolding.
+        It will keep unfolding—in the quiet moments,
+        in the challenges they face together, in the dreams they build,
+        in the love they model for their daughter and anyone who sees them.
+      </narration>
+      
+      <transition type="fade" duration="2000"/>
+    </scene>
+  </act>
+
+  <!-- ============================================
+       EPILOGUE: Into the Future
+       ============================================ -->
+  
+  <epilogue id="epilogue" location="Timeless" time="All Moments">
+    <heading level="1">Epilogue: The Story Continues</heading>
+    
+    <narration type="exposition">
+      <parenthetical>The narrator's final wisdom</parenthetical>
+      
+      So ends our tale—and yet, it is only beginning.
+      
+      Philip Freeman learned that the greatest code is written
+      not on a screen, but in the everyday choices to love.
+      
+      Sally Stone discovered that the most beautiful art
+      is the life created when two souls commit to growth together.
+      
+      Together, they proved that technology and humanity,
+      innovation and tradition, individual dreams and shared purpose
+      are not opposites. They are partners.
+      
+      Their story is not unique. In homes and cities across the world,
+      countless people are writing similar stories:
+      Stories of connection. Stories of love. Stories of commitment.
+      
+      You, reading this, may be writing your own.
+      
+      And if you are, remember this:
+      The best part hasn't happened yet.
+      Not because your love isn't real or beautiful.
+      But because love is infinite. It grows. It deepens.
+      It surprises you with new facets and new meanings.
+      
+      The best part is happening right now.
+      In this moment. In your choice to show up, be present,
+      and love the person you've chosen.
+      
+      That is the real miracle.
+      That is the greatest creation.
+      That is the story worth telling.
+    </narration>
+    
+    <sound type="music"
+           src="audio/music/theme-final-hopeful.mp3"
+           duration="60"
+           volume="40">
+      <description>
+        Original, beautiful composition of hope and joy.
+        Neither ending nor climax, but a gentle continuation.
+        The music of life going on.
+      </description>
+    </sound>
+    
+    <narration type="closing">
+      <parenthetical>Soft, intimate, as if spoken directly to you</parenthetical>
+      
+      Philip and Sally lived their happily ever after.
+      Not without challenges. Not without growth and change.
+      But with commitment, presence, and love.
+      
+      May you do the same.
+      
+      May you find your Sally or your Philip.
+      May you build something beautiful together.
+      May you remember that the best part is always yet to come.
+      
+      This is their story.
+      This is now your story too.
+      
+      Go and create it.
+    </narration>
+  </epilogue>
+
+  <!-- ============================================
+       CREDITS: Production Information
+       ============================================ -->
+  
+  <section id="credits">
+    <heading level="1">Credits</heading>
+    
+    <subsection id="production-information">
+      <heading level="2">Production Information</heading>
+      
+      <list type="unordered">
+        <item><strong>Title:</strong> CodeBase: A Love Story Celebrated</item>
+        <item><strong>Format:</strong> Original Screenplay in SPKML</item>
+        <item><strong>Purpose:</strong> Demonstration of romantic storytelling using SPKML Screenplay Extension</item>
+        <item><strong>Written:</strong> February 2026</item>
+        <item><strong>License:</strong> CC-BY-SA 4.0 (Open Source)</item>
+        <item><strong>Maintained By:</strong> Dylan OS Foundation</item>
+      </list>
+    </subsection>
+    
+    <subsection id="technical-credits">
+      <heading level="2">Technical Credits</heading>
+      
+      <list type="unordered">
+        <item><strong>SPKML Specification:</strong> Dylan OS Foundation</item>
+        <item><strong>Screenplay Extension:</strong> Dylan OS Foundation</item>
+        <item><strong>Framework Implementation:</strong> SPKML v1.0</item>
+        <item><strong>Original Story:</strong> This Adaptation (Not reproduction of copyrighted material)</item>
+      </list>
+    </subsection>
+    
+    <subsection id="thematic-inspiration">
+      <heading level="2">Thematic Inspiration</heading>
+      
+      <paragraph>
+        This original screenplay was inspired by the philosophical themes
+        of CodeBase by Christopher Johnson:
+        the intersection of technology and humanity, the power of connection,
+        and the realization that love is the greatest creation of all.
+      </paragraph>
+      
+      <paragraph>
+        This is an original work demonstrating how such themes can be
+        adapted into romantic storytelling using the SPKML Screenplay Extension.
+      </paragraph>
+    </subsection>
+  </section>
+
+</spkml>
+
+<!-- 
+     RENDERING NOTES:
+     
+     This screenplay can be rendered as:
+     
+     1. INTERACTIVE HTML
+        xsltproc screenplay-to-html.xslt CodeBase_Love_Story.spkml > output.html
+        
+     2. PDF SCRIPT
+        Use wkhtmltopdf or Prince to convert HTML to professional screenplay PDF
+        
+     3. AUDIOBOOK MANIFEST
+        Generate audio sync file with narration, dialogue, and music cues
+        
+     4. EPUB EBOOK
+        Package as EPUB with embedded audio references
+        
+     This demonstrates the complete capability of SPKML to:
+     - Author romantic storytelling with structure and semantics
+     - Integrate multimedia (narration, sound design, music)
+     - Transform to multiple output formats
+     - Preserve content as open XML for decades
+     
+     The screenplay honors themes of the original work while being
+     an entirely original creation suitable for professional adaptation.
+-->

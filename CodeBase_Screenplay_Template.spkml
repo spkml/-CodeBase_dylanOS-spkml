@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    CodeBase: Interactive Screenplay
+    SPKML Screenplay Extension v1.0
+    
+    This is a structural template demonstrating how the CodeBase screenplay
+    would be marked up in SPKML with full voice narration integration.
+    
+    Note: The dialogue and scenes shown here are structural examples,
+    not reproduction of the original CodeBase novel.
+    
+    Original novel by: Christôpher David Jônson
+    SPKML adaptation: Dylan OS Foundation
+    License: CC-BY-SA 4.0
+-->
+
+<spkml xmlns="http://dylan.os/spkml/1.0"
+       xmlns:screenplay="http://dylan.os/spkml/1.0/screenplay"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://dylan.os/spkml/1.0/screenplay
+                           http://dylan.os/spkml/1.0/spkml-screenplay.xsd">
+
+  <!-- ============================================
+       METADATA: Production and Cast Information
+       ============================================ -->
+  
+  <metadata>
+    <title>CodeBase: Interactive Screenplay</title>
+    <subtitle>An Interactive Experience in Voice and Vision</subtitle>
+    <author>Based on the novel "CodeBase" by Christôpher David Jônson</author>
+    <adapted-by>Dylan OS Foundation</adapted-by>
+    <date>2026-02-17</date>
+    <version>1.0.0</version>
+    <type>interactive screenplay</type>
+    <language>en</language>
+    <keywords>screenplay, interactive, narration, audio drama, science fiction</keywords>
+    <description>
+      An interactive multimedia screenplay adaptation featuring professional voice acting,
+      original music score, ambient sound design, and integrated narration.
+      Designed to be experienced across multiple media: web, audio, print, and eBook.
+    </description>
+  </metadata>
+
+  <!-- ============================================
+       CAST: Character and Voice Actor Information
+       ============================================ -->
+  
+  <section id="cast">
+    <heading level="1">Cast &amp; Voices</heading>
+    
+    <subsection id="voice-cast-main">
+      <heading level="2">Main Cast</heading>
+      
+      <concept type="definition" domain="cast">
+        <term>Philip Freeman</term>
+        <definition>Protagonist. A young programmer with dreams of creating technology that serves humanity.</definition>
+        <character id="philip" 
+                   name="Philip Freeman" 
+                   role="protagonist"
+                   voice-actor="[Professional Voice Actor Name]"
+                   gender="male">
+          <description>
+            Mid-20s, intelligent, driven, idealistic. Programmer by day, dreamer by night.
+            Carries both passion and vulnerability.
+          </description>
+          <voice id="philip-voice" 
+                 actor="[Voice Actor]" 
+                 gender="male" 
+                 accent="american"
+                 audio-quality="studio">
+            <sample src="voice-samples/philip-intro.mp3" duration="5"/>
+            <description>
+              Warm and intelligent with underlying passion. Voice conveys both technical
+              precision and emotional depth. Can shift from contemplative to determined.
+            </description>
+          </voice>
+        </character>
+      </concept>
+      
+      <concept type="definition" domain="cast">
+        <term>Sally Stone</term>
+        <definition>A talented musician and artist. Connection point between technology and creative expression.</definition>
+        <character id="sally" 
+                   name="Sally Stone" 
+                   role="love-interest"
+                   voice-actor="[Professional Voice Actress Name]"
+                   gender="female">
+          <description>
+            Late-20s, creative, independent, with her own artistic dreams.
+            Natural performer with distinctive presence.
+          </description>
+          <voice id="sally-voice" 
+                 actor="[Voice Actress]" 
+                 gender="female" 
+                 accent="american"
+                 audio-quality="studio">
+            <sample src="voice-samples/sally-intro.mp3" duration="5"/>
+            <description>
+              Clear, expressive voice with musical quality. Conveys both strength
+              and vulnerability. Natural performer with perfect diction.
+            </description>
+          </voice>
+        </character>
+      </concept>
+      
+      <concept type="definition" domain="cast">
+        <term>The Narrator</term>
+        <definition>Voice of the story itself. Guide through Philip's journey.</definition>
+        <character id="narrator" 
+                   name="The Narrator" 
+                   role="narrator"
+                   voice-actor="[Professional Narrator]"
+                   gender="neutral">
+          <description>
+            Omniscient narrator. Speaks directly to the audience, providing context,
+            internal monologue, and poetic reflection on the story's events.
+          </description>
+          <voice id="narrator-voice" 
+                 actor="[Professional Narrator]" 
+                 gender="male"
+                 accent="american"
+                 audio-quality="studio">
+            <sample src="voice-samples/narrator-prologue.mp3" duration="8"/>
+            <description>
+              Rich, warm, authoritative yet intimate. Professional narrator with
+              excellent pacing and emotional intelligence. Clear articulation.
+            </description>
+          </voice>
+        </character>
+      </concept>
+    </subsection>
+    
+    <subsection id="voice-cast-supporting">
+      <heading level="2">Supporting Cast &amp; Cameos</heading>
+      
+      <concept type="definition" domain="cast">
+        <term>Dylan (AI Assistant)</term>
+        <definition>Artificial intelligence created by Philip. Central to the story's exploration of consciousness and connection.</definition>
+        <character id="dylan-ai" 
+                   name="Dylan" 
+                   role="cameo"
+                   voice-actor="[Voice Actor - Ethereal/Synthesized]"
+                   gender="neutral">
+          <description>
+            Represented through digital sounds, synthesized voice, abstract concepts.
+            Not human, yet developing consciousness through interaction.
+          </description>
+          <voice id="dylan-voice" 
+                 actor="[Voice/Sound Design]" 
+                 gender="neutral"
+                 accent="digital"
+                 audio-quality="studio">
+            <sample src="voice-samples/dylan-response.mp3" duration="3"/>
+            <description>
+              Unique sound design combining synthesized elements with human-like qualities.
+              Evolves throughout the story, becoming more natural and emotional.
+            </description>
+          </voice>
+        </character>
+      </concept>
+    </subsection>
+  </section>
+
+  <!-- ============================================
+       PROLOGUE: Opening Narration
+       ============================================ -->
+  
+  <prologue id="prologue" location="Darkness" time="Timeless">
+    <heading level="1">Prologue</heading>
+    
+    <narration type="exposition" 
+               voice-id="narrator-voice" 
+               audio-src="narration/prologue.mp3"
+               duration="25">
+      <parenthetical>The voice of the story itself, warm and intimate</parenthetical>
+      
+      Every technological revolution begins with a question. Not a question asked aloud,
+      but a question whispered in the mind of a dreamer. A question that says:
+      "What if technology could be different?"
+      
+      This is the story of one such dreamer. A young programmer named Philip Freeman,
+      who dared to imagine that code could connect rather than isolate,
+      that artificial intelligence could have a conscience, that technology
+      could serve humanity rather than exploit it.
+      
+      This is the story of CodeBase.
+    </narration>
+    
+    <transition type="fade" duration="2000"/>
+  </prologue>
+
+  <!-- ============================================
+       ACT ONE: The Beginning
+       ============================================ -->
+  
+  <act number="1" title="The Beginning">
+    <heading level="1">Act One: The Beginning</heading>
+    
+    <!-- SCENE 1: The Loft -->
+    <scene number="1" 
+            id="act1-scene1"
+            location="INT. PHILIP'S LOFT - LATE NIGHT" 
+            time="11:45 PM"
+            mood="contemplative, intense">
+      
+      <heading level="2">INT. LOFT - LATE NIGHT</heading>
+      
+      <stage-direction duration="5">
+        The loft is dimly lit by the glow of multiple computer monitors.
+        Lines of code scroll across the screens, reflecting in the eyes of PHILIP FREEMAN,
+        late 20s, who sits at his desk with the intensity of someone who has
+        found their life's purpose.
+        
+        A coffee cup, half-full and forgotten hours ago, sits nearby.
+        Sheet music and a guitar rest against the wall—reminders of another world,
+        one he left behind when code became his language.
+      </stage-direction>
+      
+      <sound type="ambient" 
+             src="audio/ambient/loft-night-ambience.mp3" 
+             duration="300"
+             volume="25">
+        <description>Faint city sounds through window. Distant traffic, occasional siren.</description>
+      </sound>
+      
+      <sound type="effect" 
+             src="audio/effects/keyboard-typing-continuous.mp3" 
+             duration="300"
+             volume="40">
+        <description>Rhythmic keyboard typing, the sound of creation itself.</description>
+      </sound>
+      
+      <narration type="internal-monologue" 
+                 voice-id="narrator-voice"
+                 audio-src="narration/act1-scene1-opening.mp3"
+                 duration="12">
+        <parenthetical>Soft, reflective</parenthetical>
+        
+        This is the moment before everything changes. Philip doesn't know it yet.
+        He's simply doing what he's always done—writing code, building systems,
+        trying to solve problems. But tonight, something is different.
+        Tonight, he's not just writing code. He's writing consciousness.
+      </narration>
+      
+      <pause type="breath" duration="1000"/>
+      
+      <stage-direction character="Philip" duration="2">
+        Philip pauses, stares at his screen. His fingers hover above the keyboard.
+        A moment of doubt, quickly overcome by determination.
+      </stage-direction>
+      
+      <dialogue character="Philip" 
+                emotion="determined"
+                parenthetical="voice quiet but passionate"
+                voice-id="philip-voice"
+                audio-src="audio/dialogue/philip/act1-scene1-line1.mp3"
+                duration="4">
+        This has to work. This has to be different from everything else out there.
+      </dialogue>
+      
+      <pause type="beat" duration="800"/>
+      
+      <dialogue character="Philip" 
+                emotion="vulnerable"
+                parenthetical="voice softer, more personal"
+                voice-id="philip-voice"
+                audio-src="audio/dialogue/philip/act1-scene1-line2.mp3"
+                duration="3">
+        What if an AI could actually care?
+      </dialogue>
+      
+      <narration type="voiceover" 
+                 voice-id="narrator-voice"
+                 audio-src="narration/act1-scene1-bridge.mp3"
+                 duration="8">
+        <parenthetical>The narrator's voice grows more knowing</parenthetical>
+        
+        He wouldn't find the answer that night. Or the next. But he would pursue it
+        with a passion that would change everything—his life, his dreams, his understanding
+        of what it means to create.
+      </narration>
+      
+      <transition type="fade" duration="1500"/>
+    </scene>
+    
+    <!-- SCENE 2: The Coffee Shop Meeting -->
+    <scene number="2" 
+            id="act1-scene2"
+            location="INT. COFFEE SHOP - AFTERNOON"
+            time="3:15 PM"
+            mood="unexpected, electric">
+      
+      <heading level="2">INT. COFFEE SHOP - AFTERNOON</heading>
+      
+      <stage-direction duration="4">
+        A busy coffee shop. The kind of place where creative people gather.
+        PHILIP sits at a small table, laptop open, surrounded by notebooks
+        and sketches of architectural designs—blueprints for his code.
+        
+        He doesn't notice when someone sits across from him.
+      </stage-direction>
+      
+      <sound type="ambient" 
+             src="audio/ambient/coffee-shop-bustle.mp3"
+             duration="180"
+             volume="35">
+        <description>Coffee shop sounds: espresso machine, conversation murmur, jazz in background.</description>
+      </sound>
+      
+      <dialogue character="Unknown" 
+                emotion="curious"
+                parenthetical="A woman's voice, musical and warm"
+                voice-id="sally-voice"
+                audio-src="audio/dialogue/sally/act1-scene2-line1.mp3"
+                duration="3">
+        Is that line of code supposed to do that?
+      </dialogue>
+      
+      <stage-direction character="Philip" duration="2">
+        Philip looks up, surprised. For the first time, he notices the person
+        across from him: SALLY STONE, late 20s, musician, artist, someone who
+        sees the world differently than he does.
+      </stage-direction>
+      
+      <dialogue character="Philip" 
+                emotion="confused, then intrigued"
+                parenthetical="defensive at first, then curious"
+                voice-id="philip-voice"
+                audio-src="audio/dialogue/philip/act1-scene2-line1.mp3"
+                duration="3">
+        Do I know you?
+      </dialogue>
+      
+      <dialogue character="Sally" 
+                emotion="amused"
+                parenthetical="laughing slightly"
+                voice-id="sally-voice"
+                audio-src="audio/dialogue/sally/act1-scene2-line2.mp3"
+                duration="4">
+        Not yet. But that line of code just repeated seven times. It's like
+        a musical phrase playing over and over. Intentional?
+      </dialogue>
+      
+      <narration type="voiceover" 
+                 voice-id="narrator-voice"
+                 audio-src="narration/act1-scene2-commentary.mp3"
+                 duration="10">
+        <parenthetical>The narrator, almost amused by fate's perfect timing</parenthetical>
+        
+        Moments define us more than we realize. This ordinary Tuesday afternoon,
+        this chance conversation about code that sounded like music—this moment
+        would echo through everything that followed. Neither of them could know it,
+        but fate had written them into each other's story.
+      </narration>
+      
+      <transition type="dissolve" duration="1500"/>
+    </scene>
+    
+    <!-- Additional scenes would follow this pattern -->
+  </act>
+
+  <!-- ============================================
+       ACT TWO: Development
+       ============================================ -->
+  
+  <act number="2" title="Development">
+    <heading level="1">Act Two: Development</heading>
+    
+    <narration type="exposition" 
+               voice-id="narrator-voice"
+               audio-src="narration/act2-opening.mp3"
+               duration="15">
+      <parenthetical>The narrator's voice has evolved, grown more knowing</parenthetical>
+      
+      What began as a chance meeting became a partnership. Philip and Sally,
+      programmer and artist, brought together by a question about code that sounded
+      like music. Together, they would push the boundaries of what technology
+      could be and what dreams could become.
+      
+      But creation is never simple. It demands sacrifice, vision, and the courage
+      to pursue something no one else believes is possible.
+    </narration>
+    
+    <!-- Scene structure would continue with additional scenes -->
+    <!-- Each following the same pattern of stage direction, dialogue, and narration -->
+    
+  </act>
+
+  <!-- ============================================
+       ACT THREE: Resolution
+       ============================================ -->
+  
+  <act number="3" title="Resolution">
+    <heading level="1">Act Three: Resolution</heading>
+    
+    <!-- Scene structure would continue -->
+    
+  </act>
+
+  <!-- ============================================
+       EPILOGUE: Closing Narration
+       ============================================ -->
+  
+  <epilogue id="epilogue" location="The Future" time="Timeless">
+    <heading level="1">Epilogue</heading>
+    
+    <narration type="exposition" 
+               voice-id="narrator-voice"
+               audio-src="narration/epilogue.mp3"
+               duration="20">
+      <parenthetical>The narrator's final reflection, wise and understanding</parenthetical>
+      
+      Every story is incomplete until it meets its audience. Until someone reads it,
+      hears it, experiences it, and finds their own meaning within it.
+      
+      This is the story of CodeBase—a story about creation, about dreams,
+      about the transformative power of technology when it's guided by human values.
+      
+      But more importantly, it's an invitation. An invitation to imagine
+      what the future could be if we dared to build technology differently.
+      Technology that serves. Technology that connects. Technology with a conscience.
+      
+      The question that began this story—"What if?"—remains yours to answer.
+      What if you built something that changed the world?
+      What if your dream was possible?
+      What if the future you imagine is worth creating?
+      
+      The code waits to be written. The story waits to continue.
+      And you... you have the power to make it real.
+    </narration>
+    
+    <sound type="music"
+           src="audio/music/theme-final.mp3"
+           duration="45"
+           volume="40">
+      <description>Original orchestral theme, rising to crescendo, then fading into silence.</description>
+    </sound>
+  </epilogue>
+
+  <!-- ============================================
+       CREDITS: Production Information
+       ============================================ -->
+  
+  <section id="credits">
+    <heading level="1">Credits</heading>
+    
+    <subsection id="production-crew">
+      <heading level="2">Production</heading>
+      <list type="unordered">
+        <item>
+          <strong>Based on:</strong> "CodeBase" by Christôpher David Jônson
+        </item>
+        <item>
+          <strong>Adapted by:</strong> Dylan OS Foundation
+        </item>
+        <item>
+          <strong>Director:</strong> [Name]
+        </item>
+        <item>
+          <strong>Producer:</strong> [Name]
+        </item>
+        <item>
+          <strong>Sound Designer:</strong> [Name]
+        </item>
+        <item>
+          <strong>Music Composed by:</strong> [Name]
+        </item>
+      </list>
+    </subsection>
+    
+    <subsection id="cast-credits">
+      <heading level="2">Voice Cast</heading>
+      <list type="unordered">
+        <item>Philip Freeman — [Voice Actor Name]</item>
+        <item>Sally Stone — [Voice Actress Name]</item>
+        <item>Narrator — [Narrator Name]</item>
+        <item>Supporting Characters — [Additional Actors]</item>
+      </list>
+    </subsection>
+  </section>
+
+</spkml>
+
+<!-- ============================================
+     TECHNICAL NOTES
+     ============================================
+     
+     This SPKML screenplay demonstrates:
+     
+     1. SEMANTIC STRUCTURE
+        - Organized by acts and scenes
+        - Clear stage directions
+        - Character-specific dialogue
+        
+     2. VOICE INTEGRATION
+        - Voice actor metadata
+        - Audio file references
+        - Emotional direction for delivery
+        
+     3. NARRATION LAYERS
+        - Exposition narration
+        - Voiceover commentary
+        - Internal monologue
+        
+     4. MULTIMEDIA ELEMENTS
+        - Ambient sound integration
+        - Sound effects
+        - Music cues
+        
+     5. SEMANTIC ENRICHMENT
+        - Character definitions as concepts
+        - Metadata preservation
+        - Accessibility features
+        
+     RENDERING OPTIONS:
+     
+     • HTML: Interactive web version with audio players
+     • PDF: Professional screenplay format for printing
+     • EPUB: eBook with embedded audio references
+     • Audio: Complete audiobook with synchronized narration
+     
+     This demonstrates how SPKML enables content to be:
+     - Authored once in semantic format
+     - Published in multiple media
+     - Experienced differently (read, listened, viewed)
+     - Preserved permanently in open format
+     
+============================================ -->

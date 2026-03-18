@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    SPKML (Semantic Programming and Knowledge Markup Language) v1.0
+    XML Schema Definition (XSD)
+    
+    Target Namespace: http://dylan.os/spkml/1.0
+    Schema Location: http://dylan.os/spkml/1.0/spkml.xsd
+    
+    This XSD provides detailed validation rules for SPKML documents,
+    including type definitions, constraints, and element relationships.
+    
+    License: CC-BY-SA 4.0
+    Maintained by: Dylan OS Foundation
+    Last Updated: February 2026
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://dylan.os/spkml/1.0"
+           xmlns:spkml="http://dylan.os/spkml/1.0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <!-- ============================================
+       Type Definitions
+       ============================================ -->
+
+  <!-- Basic Type: Language Code (ISO 639-1) -->
+  <xs:simpleType name="languageCodeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-z]{2}(-[A-Z]{2})?"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Basic Type: URL/URI -->
+  <xs:simpleType name="uriType">
+    <xs:restriction base="xs:anyURI"/>
+  </xs:simpleType>
+
+  <!-- Basic Type: ID Reference -->
+  <xs:simpleType name="idRefType">
+    <xs:restriction base="xs:ID"/>
+  </xs:simpleType>
+
+  <!-- Basic Type: CSS Class Names -->
+  <xs:simpleType name="classNameType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-zA-Z0-9\-_\s]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Basic Type: ISO 8601 Date -->
+  <xs:simpleType name="dateType">
+    <xs:restriction base="xs:date"/>
+  </xs:simpleType>
+
+  <!-- Basic Type: ISO 8601 Duration -->
+  <xs:simpleType name="durationType">
+    <xs:restriction base="xs:integer"/>
+  </xs:simpleType>
+
+  <!-- Basic Type: Heading Level (1-6) -->
+  <xs:simpleType name="headingLevelType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="1"/>
+      <xs:maxInclusive value="6"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Basic Type: List Type (ordered or unordered) -->
+  <xs:simpleType name="listTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ordered"/>
+      <xs:enumeration value="unordered"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Basic Type: Media Format Types -->
+  <xs:simpleType name="audioFormatType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mp3"/>
+      <xs:enumeration value="ogg"/>
+      <xs:enumeration value="wav"/>
+      <xs:enumeration value="flac"/>
+      <xs:enumeration value="aac"/>
+      <xs:enumeration value="m4a"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="videoFormatType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mp4"/>
+      <xs:enumeration value="webm"/>
+      <xs:enumeration value="ogv"/>
+      <xs:enumeration value="mkv"/>
+      <xs:enumeration value="avi"/>
+      <xs:enumeration value="mov"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="imageFormatType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="jpeg"/>
+      <xs:enumeration value="png"/>
+      <xs:enumeration value="gif"/>
+      <xs:enumeration value="svg"/>
+      <xs:enumeration value="webp"/>
+      <xs:enumeration value="bmp"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="animationFormatType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="svg"/>
+      <xs:enumeration value="webm"/>
+      <xs:enumeration value="gif"/>
+      <xs:enumeration value="apng"/>
+      <xs:enumeration value="webp"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Basic Type: Figure Type -->
+  <xs:simpleType name="figureTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="image"/>
+      <xs:enumeration value="diagram"/>
+      <xs:enumeration value="chart"/>
+      <xs:enumeration value="screenshot"/>
+      <xs:enumeration value="other"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Basic Type: Reference Type -->
+  <xs:simpleType name="referenceTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="book"/>
+      <xs:enumeration value="journal"/>
+      <xs:enumeration value="website"/>
+      <xs:enumeration value="paper"/>
+      <xs:enumeration value="conference"/>
+      <xs:enumeration value="thesis"/>
+      <xs:enumeration value="report"/>
+      <xs:enumeration value="other"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Basic Type: Concept Type -->
+  <xs:simpleType name="conceptTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="principle"/>
+      <xs:enumeration value="theorem"/>
+      <xs:enumeration value="definition"/>
+      <xs:enumeration value="law"/>
+      <xs:enumeration value="hypothesis"/>
+      <xs:enumeration value="theory"/>
+      <xs:enumeration value="postulate"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Basic Type: Difficulty Level -->
+  <xs:simpleType name="difficultyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="basic"/>
+      <xs:enumeration value="intermediate"/>
+      <xs:enumeration value="advanced"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Basic Type: Boolean -->
+  <xs:simpleType name="booleanType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="true"/>
+      <xs:enumeration value="false"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Basic Type: Text Alignment -->
+  <xs:simpleType name="alignmentType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="left"/>
+      <xs:enumeration value="center"/>
+      <xs:enumeration value="right"/>
+      <xs:enumeration value="justify"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ============================================
+       Attribute Group Definitions
+       ============================================ -->
+
+  <!-- Common attributes for all elements -->
+  <xs:attributeGroup name="commonAttributes">
+    <xs:attribute name="id" type="xs:ID"/>
+    <xs:attribute name="class" type="spkml:classNameType"/>
+    <xs:attribute name="title" type="xs:string"/>
+    <xs:attribute name="xml:lang" type="spkml:languageCodeType"/>
+    <xs:attribute name="role" type="xs:string"/>
+  </xs:attributeGroup>
+
+  <!-- Accessibility attributes -->
+  <xs:attributeGroup name="accessibilityAttributes">
+    <xs:attribute name="aria-label" type="xs:string"/>
+    <xs:attribute name="aria-describedby" type="xs:string"/>
+    <xs:attribute name="aria-role" type="xs:string"/>
+  </xs:attributeGroup>
+
+  <!-- ============================================
+       Complex Type Definitions
+       ============================================ -->
+
+  <!-- Inline mixed content (text with emphasis, strong, code) -->
+  <xs:complexType name="inlineMixedType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="emphasis" type="spkml:inlineType"/>
+      <xs:element name="strong" type="spkml:inlineType"/>
+      <xs:element name="code" type="xs:string"/>
+      <xs:element name="literal" type="xs:string"/>
+      <xs:element name="footnote" type="spkml:footnoteType"/>
+      <xs:element name="reference" type="spkml:referenceType"/>
+    </xs:choice>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Simple inline type (text with limited nesting) -->
+  <xs:complexType name="inlineType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="strong" type="xs:string"/>
+      <xs:element name="code" type="xs:string"/>
+    </xs:choice>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Metadata container type -->
+  <xs:complexType name="metadataType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string" minOccurs="0"/>
+      <xs:element name="subtitle" type="xs:string" minOccurs="0"/>
+      <xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="date" type="spkml:dateType" minOccurs="0"/>
+      <xs:element name="version" type="xs:string" minOccurs="0"/>
+      <xs:element name="license" type="xs:string" minOccurs="0"/>
+      <xs:element name="keywords" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="language" type="spkml:languageCodeType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="type" type="xs:string" minOccurs="0"/>
+      <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Heading type -->
+  <xs:complexType name="headingType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="emphasis" type="spkml:inlineType"/>
+      <xs:element name="strong" type="spkml:inlineType"/>
+      <xs:element name="code" type="xs:string"/>
+    </xs:choice>
+    <xs:attribute name="level" type="spkml:headingLevelType" use="required"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Paragraph type -->
+  <xs:complexType name="paragraphType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="emphasis" type="spkml:inlineType"/>
+      <xs:element name="strong" type="spkml:inlineType"/>
+      <xs:element name="code" type="xs:string"/>
+      <xs:element name="literal" type="xs:string"/>
+      <xs:element name="footnote" type="spkml:footnoteType"/>
+      <xs:element name="reference" type="spkml:referenceType"/>
+      <xs:element name="quote" type="spkml:quoteType"/>
+    </xs:choice>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- List item type -->
+  <xs:complexType name="listItemType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="paragraph" type="spkml:paragraphType"/>
+      <xs:element name="list" type="spkml:listType"/>
+      <xs:element name="codeblock" type="spkml:codeblockType"/>
+      <xs:element name="emphasis" type="spkml:inlineType"/>
+      <xs:element name="strong" type="spkml:inlineType"/>
+      <xs:element name="code" type="xs:string"/>
+    </xs:choice>
+    <xs:attribute name="value" type="xs:string"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- List type -->
+  <xs:complexType name="listType">
+    <xs:sequence>
+      <xs:element name="item" type="spkml:listItemType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="spkml:listTypeType" use="required"/>
+    <xs:attribute name="start" type="xs:string"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Code block type -->
+  <xs:complexType name="codeblockType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="keyword" type="xs:string"/>
+      <xs:element name="string" type="xs:string"/>
+      <xs:element name="comment" type="xs:string"/>
+      <xs:element name="operator" type="xs:string"/>
+    </xs:choice>
+    <xs:attribute name="language" type="xs:string"/>
+    <xs:attribute name="linenumbers" type="spkml:booleanType"/>
+    <xs:attribute name="startline" type="xs:integer"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Figure type -->
+  <xs:complexType name="figureType">
+    <xs:sequence>
+      <xs:element name="caption" type="spkml:inlineMixedType" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="source" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="src" type="spkml:uriType" use="required"/>
+          <xs:attribute name="type" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="src" type="spkml:uriType" use="required"/>
+    <xs:attribute name="alt" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="spkml:figureTypeType"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Audio type -->
+  <xs:complexType name="audioType">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="transcript" type="xs:string" minOccurs="0"/>
+      <xs:element name="source" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="src" type="spkml:uriType" use="required"/>
+          <xs:attribute name="type" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="src" type="spkml:uriType" use="required"/>
+    <xs:attribute name="format" type="spkml:audioFormatType"/>
+    <xs:attribute name="duration" type="spkml:durationType"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Video type -->
+  <xs:complexType name="videoType">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="transcript" type="xs:string" minOccurs="0"/>
+      <xs:element name="source" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="src" type="spkml:uriType" use="required"/>
+          <xs:attribute name="type" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="src" type="spkml:uriType" use="required"/>
+    <xs:attribute name="format" type="spkml:videoFormatType"/>
+    <xs:attribute name="duration" type="spkml:durationType"/>
+    <xs:attribute name="width" type="xs:integer"/>
+    <xs:attribute name="height" type="xs:integer"/>
+    <xs:attribute name="poster" type="spkml:uriType"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Animation type -->
+  <xs:complexType name="animationType">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="source" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="src" type="spkml:uriType" use="required"/>
+          <xs:attribute name="type" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="src" type="spkml:uriType" use="required"/>
+    <xs:attribute name="format" type="spkml:animationFormatType"/>
+    <xs:attribute name="loops" type="xs:integer"/>
+    <xs:attribute name="duration" type="spkml:durationType"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Quote type -->
+  <xs:complexType name="quoteType">
+    <xs:sequence>
+      <xs:element name="paragraph" type="spkml:paragraphType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="source" type="xs:string"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Reference type -->
+  <xs:complexType name="referenceType" mixed="true">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="spkml:referenceTypeType"/>
+        <xs:attribute name="url" type="spkml:uriType"/>
+        <xs:attribute name="doi" type="xs:string"/>
+        <xs:attribute name="isbn" type="xs:string"/>
+        <xs:attributeGroup ref="spkml:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <!-- Footnote type -->
+  <xs:complexType name="footnoteType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="paragraph" type="spkml:paragraphType"/>
+      <xs:element name="emphasis" type="spkml:inlineType"/>
+      <xs:element name="strong" type="spkml:inlineType"/>
+      <xs:element name="code" type="xs:string"/>
+    </xs:choice>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="number" type="xs:integer"/>
+  </xs:complexType>
+
+  <!-- Concept type -->
+  <xs:complexType name="conceptType">
+    <xs:sequence>
+      <xs:element name="term" type="spkml:inlineMixedType" minOccurs="0"/>
+      <xs:element name="definition" type="spkml:paragraphType" minOccurs="0"/>
+      <xs:element name="explanation" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType mixed="true">
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="paragraph" type="spkml:paragraphType"/>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="example" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element name="paragraph" type="spkml:paragraphType"/>
+              <xs:element name="codeblock" type="spkml:codeblockType"/>
+              <xs:element name="figure" type="spkml:figureType"/>
+            </xs:choice>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="counter-example" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+              <xs:element name="paragraph" type="spkml:paragraphType"/>
+              <xs:element name="codeblock" type="spkml:codeblockType"/>
+              <xs:element name="figure" type="spkml:figureType"/>
+            </xs:choice>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="equation" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="spkml:conceptTypeType"/>
+    <xs:attribute name="domain" type="xs:string"/>
+    <xs:attribute name="difficulty" type="spkml:difficultyType"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Table types -->
+  <xs:complexType name="tableType">
+    <xs:sequence>
+      <xs:element name="header" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="cell" type="spkml:cellType" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="row">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="cell" type="spkml:cellType" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="columns" type="xs:integer"/>
+    <xs:attribute name="bordered" type="spkml:booleanType"/>
+    <xs:attribute name="striped" type="spkml:booleanType"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <xs:complexType name="cellType" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="paragraph" type="spkml:paragraphType"/>
+      <xs:element name="list" type="spkml:listType"/>
+      <xs:element name="emphasis" type="spkml:inlineType"/>
+      <xs:element name="strong" type="spkml:inlineType"/>
+      <xs:element name="code" type="xs:string"/>
+    </xs:choice>
+    <xs:attribute name="colspan" type="xs:integer"/>
+    <xs:attribute name="rowspan" type="xs:integer"/>
+    <xs:attribute name="align" type="spkml:alignmentType"/>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+  </xs:complexType>
+
+  <!-- Block content type (sections can contain these) -->
+  <xs:group name="blockContent">
+    <xs:choice>
+      <xs:element name="heading" type="spkml:headingType"/>
+      <xs:element name="paragraph" type="spkml:paragraphType"/>
+      <xs:element name="list" type="spkml:listType"/>
+      <xs:element name="codeblock" type="spkml:codeblockType"/>
+      <xs:element name="figure" type="spkml:figureType"/>
+      <xs:element name="audio" type="spkml:audioType"/>
+      <xs:element name="video" type="spkml:videoType"/>
+      <xs:element name="animation" type="spkml:animationType"/>
+      <xs:element name="table" type="spkml:tableType"/>
+      <xs:element name="quote" type="spkml:quoteType"/>
+      <xs:element name="concept" type="spkml:conceptType"/>
+      <xs:element name="reference" type="spkml:referenceType"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- Section type -->
+  <xs:complexType name="sectionType">
+    <xs:sequence>
+      <xs:group ref="spkml:blockContent" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="subsection" type="spkml:subsectionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+    <xs:attributeGroup ref="spkml:accessibilityAttributes"/>
+  </xs:complexType>
+
+  <!-- Subsection type -->
+  <xs:complexType name="subsectionType">
+    <xs:sequence>
+      <xs:group ref="spkml:blockContent" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="subsection" type="spkml:subsectionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attributeGroup ref="spkml:commonAttributes"/>
+    <xs:attributeGroup ref="spkml:accessibilityAttributes"/>
+  </xs:complexType>
+
+  <!-- ============================================
+       Root Element Definition
+       ============================================ -->
+
+  <xs:element name="spkml">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="metadata" type="spkml:metadataType"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:group ref="spkml:blockContent"/>
+          <xs:element name="section" type="spkml:sectionType"/>
+          <xs:element name="subsection" type="spkml:subsectionType"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string"/>
+      <xs:attributeGroup ref="spkml:commonAttributes"/>
+      <xs:attributeGroup ref="spkml:accessibilityAttributes"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

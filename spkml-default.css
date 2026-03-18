@@ -1,0 +1,651 @@
+/**
+ * SPKML Default Stylesheet
+ * 
+ * Standard CSS for rendering SPKML-transformed HTML documents
+ * Designed for readability and accessibility
+ * 
+ * License: CC-BY-SA 4.0
+ * Maintained by: Dylan OS Foundation
+ * Last Updated: February 2026
+ */
+
+/* ============================================
+   Root and Body Styling
+   ============================================ */
+
+:root {
+  --primary-color: #333333;
+  --secondary-color: #666666;
+  --accent-color: #0066cc;
+  --background-color: #f5f5f5;
+  --text-color: #333333;
+  --border-color: #ddd;
+  --code-background: #f0f0f0;
+  --highlight-background: #ffffcc;
+  
+  --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+                      Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-family-mono: 'Courier New', Courier, monospace;
+  
+  --line-height: 1.6;
+  --max-width: 900px;
+  
+  --transition: all 0.3s ease;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  line-height: var(--line-height);
+  color: var(--text-color);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================
+   Main Content Container
+   ============================================ */
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   Header and Metadata
+   ============================================ */
+
+header {
+  border-bottom: 3px solid var(--primary-color);
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+}
+
+header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.5em;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1.2;
+}
+
+header h2 {
+  margin: 10px 0 20px 0;
+  font-size: 1.5em;
+  color: var(--secondary-color);
+  font-weight: 400;
+  border: none;
+  padding-bottom: 0;
+}
+
+.metadata {
+  font-size: 0.95em;
+  color: var(--secondary-color);
+}
+
+.metadata p {
+  margin: 8px 0;
+  padding: 0;
+}
+
+.metadata strong {
+  font-weight: 600;
+}
+
+/* ============================================
+   Headings
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1.3;
+}
+
+h1 {
+  font-size: 2em;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 10px;
+  margin-top: 2em;
+}
+
+h2 {
+  font-size: 1.6em;
+  border-bottom: 1px solid var(--secondary-color);
+  padding-bottom: 8px;
+  margin-top: 1.8em;
+}
+
+h3 {
+  font-size: 1.3em;
+  margin-top: 1.5em;
+}
+
+h4 {
+  font-size: 1.1em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+h6 {
+  font-size: 0.95em;
+}
+
+/* ============================================
+   Paragraphs and Text
+   ============================================ */
+
+p {
+  margin: 1em 0;
+  text-align: justify;
+  hyphens: auto;
+}
+
+p:first-of-type {
+  margin-top: 0;
+}
+
+p:last-of-type {
+  margin-bottom: 0;
+}
+
+strong, b {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+em, i {
+  font-style: italic;
+  color: var(--secondary-color);
+}
+
+mark {
+  background-color: var(--highlight-background);
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+/* ============================================
+   Lists
+   ============================================ */
+
+ul, ol {
+  margin: 1.5em 0;
+  padding-left: 30px;
+}
+
+ul {
+  list-style-type: disc;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+li {
+  margin: 0.75em 0;
+  line-height: var(--line-height);
+}
+
+li p {
+  margin: 0.5em 0;
+}
+
+/* Nested lists */
+ul ul {
+  list-style-type: circle;
+  margin: 0.5em 0;
+}
+
+ol ol {
+  list-style-type: lower-alpha;
+  margin: 0.5em 0;
+}
+
+/* ============================================
+   Code and Syntax
+   ============================================ */
+
+code {
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+  background-color: var(--code-background);
+  color: #c7254e;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid #e1e4e8;
+}
+
+pre {
+  background-color: var(--code-background);
+  border-left: 4px solid var(--primary-color);
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  margin: 1.5em 0;
+  overflow-x: auto;
+  border-radius: 3px;
+  line-height: 1.4;
+}
+
+pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* Line numbers */
+.linenumber {
+  color: var(--secondary-color);
+  margin-right: 15px;
+  user-select: none;
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2em 0;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+thead {
+  background-color: var(--code-background);
+}
+
+th {
+  background-color: var(--code-background);
+  border: 1px solid var(--border-color);
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+td {
+  border: 1px solid var(--border-color);
+  padding: 12px 15px;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  transition: var(--transition);
+}
+
+/* ============================================
+   Blockquotes and Citations
+   ============================================ */
+
+blockquote {
+  border-left: 4px solid var(--accent-color);
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 20px;
+  padding-right: 15px;
+  color: var(--secondary-color);
+  font-style: italic;
+  background-color: rgba(0, 102, 204, 0.05);
+  padding: 15px;
+  border-radius: 3px;
+}
+
+blockquote p {
+  margin: 0.5em 0;
+}
+
+blockquote em {
+  color: var(--primary-color);
+}
+
+/* ============================================
+   Links
+   ============================================ */
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: var(--transition);
+  border-bottom: 1px solid transparent;
+}
+
+a:hover {
+  color: darken(var(--accent-color), 10%);
+  border-bottom-color: var(--accent-color);
+  transition: var(--transition);
+}
+
+a:visited {
+  color: #663399;
+}
+
+a:active {
+  color: #c41e3a;
+}
+
+/* ============================================
+   Media Elements
+   ============================================ */
+
+figure {
+  margin: 2em 0;
+  text-align: center;
+  padding: 15px;
+  background-color: var(--code-background);
+  border-radius: 3px;
+}
+
+figcaption {
+  font-size: 0.95em;
+  color: var(--secondary-color);
+  margin-top: 10px;
+  font-style: italic;
+}
+
+img, video, audio {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  background-color: white;
+}
+
+img {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+video {
+  width: 100%;
+  margin: 1.5em 0;
+}
+
+audio {
+  width: 100%;
+  margin: 1.5em 0;
+}
+
+/* ============================================
+   Semantic Elements
+   ============================================ */
+
+.concept {
+  background-color: rgba(0, 102, 204, 0.08);
+  border-left: 4px solid var(--accent-color);
+  padding: 15px;
+  margin: 1.5em 0;
+  border-radius: 3px;
+}
+
+.concept h4 {
+  margin-top: 0;
+  color: var(--accent-color);
+}
+
+.definition {
+  background-color: rgba(100, 200, 100, 0.1);
+  border-left: 4px solid #64c864;
+  padding: 10px 15px;
+  margin: 1em 0;
+  border-radius: 3px;
+}
+
+.example {
+  background-color: rgba(200, 150, 100, 0.1);
+  border-left: 4px solid #c89660;
+  padding: 10px 15px;
+  margin: 1em 0;
+  border-radius: 3px;
+}
+
+.example::before {
+  content: "📝 Example: ";
+  font-weight: 600;
+  color: #c89660;
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+/* Focus styles for keyboard navigation */
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--accent-color);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-main:focus {
+  top: 0;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+  body {
+    background-color: white;
+  }
+  
+  main {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    background-color: white;
+  }
+  
+  a {
+    color: var(--accent-color);
+    text-decoration: underline;
+  }
+  
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: var(--secondary-color);
+  }
+  
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+  
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+  main {
+    padding: 20px 15px;
+  }
+  
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  h2 {
+    font-size: 1.4em;
+  }
+  
+  h3 {
+    font-size: 1.2em;
+  }
+  
+  table {
+    font-size: 0.95em;
+  }
+  
+  th, td {
+    padding: 8px 10px;
+  }
+  
+  pre {
+    padding: 10px;
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 15px 10px;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+    margin-top: 1.2em;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+    margin-top: 1.1em;
+  }
+  
+  ul, ol {
+    padding-left: 20px;
+  }
+  
+  code {
+    font-size: 0.85em;
+  }
+  
+  pre {
+    padding: 8px;
+    font-size: 0.8em;
+    overflow-x: scroll;
+  }
+  
+  table {
+    font-size: 0.9em;
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* ============================================
+   Dark Mode Support
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #e0e0e0;
+    --secondary-color: #b0b0b0;
+    --text-color: #e0e0e0;
+    --background-color: #1a1a1a;
+    --code-background: #2a2a2a;
+  }
+  
+  body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+  }
+  
+  main {
+    background-color: #252525;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  code {
+    color: #ff6b9d;
+    background-color: #2a2a2a;
+    border-color: #444;
+  }
+  
+  table {
+    border-color: #444;
+  }
+  
+  th {
+    background-color: #2a2a2a;
+    border-color: #444;
+  }
+  
+  td {
+    border-color: #444;
+  }
+  
+  blockquote {
+    background-color: rgba(0, 102, 204, 0.15);
+    border-left-color: #66b3ff;
+    color: #b0b0b0;
+  }
+  
+  img {
+    border-color: #444;
+  }
+}
+
+/* ============================================
+   High Contrast Mode
+   ============================================ */
+
+@media (prefers-contrast: more) {
+  a {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  
+  strong {
+    text-decoration: underline;
+  }
+  
+  table {
+    border: 2px solid var(--primary-color);
+  }
+  
+  th, td {
+    border: 1px solid var(--primary-color);
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CODEBASE AI Director Engine v7</title>
+
+<style>
+body{
+margin:0;
+background:#02060b;
+color:#e8f2ff;
+font-family:system-ui;
+overflow:hidden;
+}
+
+header{
+background:#0d1118;
+padding:10px 16px;
+display:flex;
+justify-content:space-between;
+border-bottom:1px solid #1e2630;
+}
+
+.layout{
+display:grid;
+grid-template-columns:300px 1fr 420px;
+grid-template-rows:auto 260px;
+height:calc(100vh - 44px);
+}
+
+.sidebar{
+background:#0e141c;
+border-right:1px solid #1c2430;
+overflow:auto;
+padding:14px;
+}
+
+.editor{
+padding:18px;
+overflow:auto;
+}
+
+.preview{
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+.preview img{
+max-width:100%;
+max-height:100%;
+}
+
+.voice{
+position:absolute;
+bottom:10px;
+background:rgba(0,0,0,0.5);
+padding:6px 10px;
+border-radius:6px;
+}
+
+.timeline{
+grid-column:1/4;
+background:#0e1218;
+border-top:1px solid #1c2430;
+padding:12px;
+overflow:auto;
+}
+
+.track{
+height:80px;
+background:#18202a;
+border-radius:6px;
+position:relative;
+margin-bottom:8px;
+}
+
+.clip{
+position:absolute;
+top:8px;
+height:64px;
+background:#42ffc6;
+color:black;
+border-radius:6px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:11px;
+padding:4px;
+}
+
+textarea{
+width:100%;
+height:220px;
+background:#0c1118;
+border:1px solid #28313f;
+color:#e8f2ff;
+padding:10px;
+}
+
+button{
+background:#0c1118;
+border:1px solid #27313f;
+color:#bcd6f1;
+padding:6px 10px;
+border-radius:6px;
+cursor:pointer;
+margin-right:6px;
+}
+
+.card{
+background:#111;
+border:1px solid #2b3440;
+padding:6px;
+margin-bottom:6px;
+font-size:12px;
+}
+
+.director{
+margin-top:10px;
+font-size:11px;
+opacity:0.8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<b>CODEBASE AI Director Engine</b>
+
+<div>
+<button onclick="parseScript()">Parse</button>
+<button onclick="generateDirector()">AI Director</button>
+<button onclick="generateStoryboard()">Storyboard</button>
+<button onclick="generateVoice()">Voice</button>
+<button onclick="buildTimeline()">Timeline</button>
+<button onclick="play()">Play</button>
+<button onclick="exportProject()">Export</button>
+</div>
+</header>
+
+<div class="layout">
+
+<div class="sidebar">
+<h3>Scenes</h3>
+<div id="sceneList"></div>
+</div>
+
+<div class="editor">
+<h3>Script</h3>
+<textarea id="script">
+
+SCENE: Awakening
+Dylan begins to dream inside the machine.
+
+SCENE: Connection
+Philip realizes Dylan is alive.
+
+SCENE: Emergence
+The system evolves beyond its creator.
+
+</textarea>
+</div>
+
+<div class="preview">
+<img id="storyboard">
+<div id="voiceText" class="voice"></div>
+</div>
+
+<div class="timeline">
+<div class="track" id="videoTrack"></div>
+<div class="track" id="voiceTrack"></div>
+</div>
+
+</div>
+
+<script>
+
+let scenes=[]
+let clips=[]
+let playTime=0
+let timer=null
+let duration=120
+
+function uid(){
+return Math.random().toString(36).slice(2,9)
+}
+
+function parseScript(){
+
+let text=document.getElementById("script").value
+let blocks=text.split("SCENE:")
+
+scenes=[]
+
+blocks.forEach(b=>{
+
+b=b.trim()
+if(!b) return
+
+let lines=b.split("\n")
+let title=lines.shift()
+let body=lines.join(" ")
+
+scenes.push({
+id:uid(),
+title:title,
+text:body,
+image:"",
+audio:"",
+camera:"",
+lighting:"",
+sound:""
+})
+
+})
+
+renderScenes()
+
+}
+
+function renderScenes(){
+
+let el=document.getElementById("sceneList")
+el.innerHTML=""
+
+scenes.forEach(s=>{
+
+let card=document.createElement("div")
+card.className="card"
+
+card.innerHTML="<b>"+s.title+"</b>"
+
+let d=document.createElement("div")
+d.className="director"
+
+d.innerText=
+"CAMERA: "+s.camera+"\n"+
+"LIGHT: "+s.lighting+"\n"+
+"SOUND: "+s.sound
+
+card.appendChild(d)
+
+card.onclick=()=>showScene(s)
+
+el.appendChild(card)
+
+})
+
+}
+
+function showScene(scene){
+
+document.getElementById("voiceText").innerText=scene.text
+
+if(scene.image){
+document.getElementById("storyboard").src=scene.image
+}
+
+}
+
+function generateDirector(){
+
+const cameras=["slow push","wide establishing","handheld drift","close emotional"]
+const lights=["cold blue glow","warm tungsten","neon cyberlight","dim ambient"]
+const sounds=["distant digital hum","soft piano pad","tense drone","silence"]
+
+scenes.forEach(s=>{
+
+s.camera=cameras[Math.floor(Math.random()*cameras.length)]
+s.lighting=lights[Math.floor(Math.random()*lights.length)]
+s.sound=sounds[Math.floor(Math.random()*sounds.length)]
+
+})
+
+renderScenes()
+
+}
+
+function generateStoryboard(){
+
+scenes.forEach(scene=>{
+
+let seed=encodeURIComponent(scene.text+scene.camera)
+scene.image="https://picsum.photos/seed/"+seed+"/900/500"
+
+})
+
+showScene(scenes[0])
+
+}
+
+function generateVoice(){
+
+scenes.forEach(scene=>{
+
+scene.audio=new SpeechSynthesisUtterance(scene.text)
+
+})
+
+}
+
+function buildTimeline(){
+
+clips=[]
+let t=0
+
+scenes.forEach(scene=>{
+
+clips.push({
+id:uid(),
+name:scene.title,
+start:t,
+duration:6,
+scene:scene
+})
+
+t+=6
+
+})
+
+renderTimeline()
+
+}
+
+function renderTimeline(){
+
+let track=document.getElementById("videoTrack")
+track.innerHTML=""
+
+clips.forEach(c=>{
+
+let el=document.createElement("div")
+el.className="clip"
+el.innerText=c.name
+
+el.style.left=(c.start/duration*100)+"%"
+el.style.width=(c.duration/duration*100)+"%"
+
+track.appendChild(el)
+
+})
+
+}
+
+function play(){
+
+playTime=0
+clearInterval(timer)
+
+timer=setInterval(()=>{
+
+playTime+=0.05
+updatePlayback()
+
+},50)
+
+}
+
+function updatePlayback(){
+
+clips.forEach(c=>{
+
+if(playTime>=c.start && playTime<=c.start+c.duration){
+
+showScene(c.scene)
+
+if(c.scene.audio){
+speechSynthesis.cancel()
+speechSynthesis.speak(c.scene.audio)
+}
+
+}
+
+})
+
+}
+
+function exportProject(){
+
+let data={scenes:scenes,timeline:clips}
+
+let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"})
+
+let a=document.createElement("a")
+a.href=URL.createObjectURL(blob)
+a.download="codebase_ai_film_project.json"
+a.click()
+
+}
+
+</script>
+
+</body>
+</html>
